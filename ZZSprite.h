@@ -2,14 +2,11 @@
 // The sprite class holds instance of a sprite
 // It will inherit from a motion class to move
 
-// Goal for tonight: COMPLETED
 /*
-A Sprite class that can be constructed and have an image added.
-And then draw this image on the screen.
-
 Goal for before the weekend:
 
-Store my own test image on the SD card, and read it off
+For now, just let it construct a pixel-rectangle
+()
 Size parameters
 Move the sprite
 */

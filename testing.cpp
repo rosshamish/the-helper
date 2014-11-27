@@ -31,13 +31,29 @@ void setup() {
     	while (1) {};
   	}
 
+  	tft.fillScreen(0);
   	/*
   	Test my Class's functionality
   	*/
-	ZZSprite mySprite;
-	mySprite.addImage(cur_image);
-	mySprite.drawSprite(tft);
+	// ZZSprite mySprite;
+	// mySprite.addImage(cur_image);
+	// mySprite.drawSprite(tft);
+
+	/*
+	Test the rectangle class
+	*/
+	Rectangle myRect (5, 10);
+	myRect.drawShape(tft);
+
 }
 
 void loop() {
+
 }
+
+
+
+
+
+
+

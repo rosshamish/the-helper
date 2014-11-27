@@ -17,5 +17,6 @@
 
 // Class header
 #include "ZZSprite.h"
+#include "Rectangle.h"
 
 #endif
