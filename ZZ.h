@@ -7,7 +7,6 @@
 #include <Adafruit_ST7735.h>
 #include <SPI.h>
 #include <SD.h>
-#include <lcd_image.h>
 
 // U of A library settings for Atmel SPI
 #define SD_CS   5
@@ -16,7 +15,6 @@
 #define TFT_RST 8
 
 // Class header
-#include "ZZSprite.h"
 #include "Rectangle.h"
 
 #endif

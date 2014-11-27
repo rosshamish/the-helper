@@ -24,14 +24,15 @@ class ZZSprite {
 private:
 
 public:
-	lcd_image_t currentImage;
 	int x;
 	int y;
+	// Constructor
+	ZZSprite(int x, int y);
 
 	// Methods
-	void addImage(lcd_image_t image);
+	void moveX();
 
-	void drawSprite(Adafruit_ST7735 tft);
+	virtual void drawShape(Adafruit_ST7735 tft);
 
 };
 

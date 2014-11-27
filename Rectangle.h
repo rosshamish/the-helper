@@ -12,16 +12,21 @@ Implementating a box shaped object
 #include <Adafruit_ST7735.h>
 #include <SPI.h>
 
+
 class Rectangle {
 private:
+	int x;
+	int y;
 	int height;
 	int width;
 public:
 	// Constructor
-	Rectangle(int height, int width);
+	Rectangle(int x, int y, int height, int width);
 
 	// Methods
 	void drawShape(Adafruit_ST7735 tft);
-}
+
+	void moveX(Adafruit_ST7735 tft);
+};
 
 #endif

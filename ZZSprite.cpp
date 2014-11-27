@@ -1,12 +1,11 @@
 #include "ZZSprite.h"
 #include <lcd_image.h>
 
-void ZZSprite::addImage(lcd_image_t image) {
-	currentImage = image;
+ZZSprite::ZZSprite(int x, int y) {
+	this->x = x;
+	this->y = y;
 }
 
-void ZZSprite::drawSprite(Adafruit_ST7735 tft) {
-	// Draw the image on the screen
-	// use lcd image draw
-	lcd_image_draw(&currentImage, &tft, 0, 0, 0, 0, 128, 128);
+void ZZSprite::moveX() {
+	this->x = this->x + 1;
 }

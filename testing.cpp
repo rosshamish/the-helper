@@ -4,9 +4,6 @@
 // Display
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
-// Edmonton map image
-lcd_image_t cur_image = { "yeg-big.lcd", 2048, 2048 };
-
 Sd2Card card;
 
 void setup() {
@@ -42,8 +39,12 @@ void setup() {
 	/*
 	Test the rectangle class
 	*/
-	Rectangle myRect (5, 10);
+	Rectangle myRect (10, 10, 5, 10);
 	myRect.drawShape(tft);
+
+	for (int i = 0; i < 50; i++) {
+		myRect.moveX(tft);
+	}
 
 }
 
