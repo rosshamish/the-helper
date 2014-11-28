@@ -4,8 +4,8 @@ Subclass of ZZSprite.cpp
 Implementating a box shaped object
 */
 
-#ifndef RECTANGLE
-#define RECTANGLE
+#ifndef RECTANGLE_H
+#define RECTANGLE_H
 
 #include <Arduino.h>
 #include <Adafruit_GFX.h>
@@ -25,6 +25,8 @@ public:
 
 	// Methods
 	void drawShape(Adafruit_ST7735 tft);
+
+	void redrawBackground(Adafruit_ST7735 tft);
 
 	void moveX(Adafruit_ST7735 tft);
 };
