@@ -24,10 +24,8 @@ void setup() {
 	Rectangle three (100, 10, 5, 10);
 
 	one.drawShape(tft);
-
-	for (int i = 0; i < 50; i++) {
-		one.moveRight(tft);
-	}
+	two.drawShape(tft);
+	three.drawShape(tft);
 
 	Scene myScene;
 	myScene.addToScene(one);
@@ -35,18 +33,12 @@ void setup() {
 	myScene.addToScene(three);
 	myScene.traverseScene();
 
-	/*
-	Testing linked list
-	*/
-	// Serial.println("linked list tests:");
+	JoyStick myJoy;
+	myJoy.addDelegate(&one);
 
-
-	// list myList = {0, NULL, NULL};
-	// addToEnd(&myList, one);
-	// addToEnd(&myList, two);
-	// addToEnd(&myList, three);
-
-	// printList(&myList);
+	while (1) {
+		myJoy.adjustPosition(tft);
+	}
 
 }
 

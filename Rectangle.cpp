@@ -15,6 +15,23 @@ int Rectangle::getX() {
 	return this->x;
 }
 
+int Rectangle::getY() {
+	return this->y;
+}
+
+/*
+Setters 
+*/
+
+void Rectangle::setY(int newY) {
+	this->y = newY;
+}
+
+void Rectangle::setX(int newX) {
+	this->x = newX;
+}
+
+
 void Rectangle::drawShape(Adafruit_ST7735 tft) {
 	tft.drawRect(this->x, this->y, this->height, this->width, 0xFFFF);
 	tft.fillRect(this->x, this->y, this->height, this->width, 0xFFFF);
