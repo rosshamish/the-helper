@@ -24,5 +24,6 @@ const int SEL = 9;
 
 // Class header
 #include "Rectangle.h"
+#include "Scene.h"
 
 #endif

@@ -19,20 +19,19 @@ A grouping shapes will be checked for collisons by this class
 #include <SPI.h>
 
 #include "Rectangle.h"
+#include "linkedList.h"
 
 class Scene {
 private:
-	
+	list* llShapes;
 public:
 	// Constructor
-	// Use default
+	Scene();
 
 	// Add to scene
 	void addToScene(Rectangle rect);
 
-
-
-
+	void traverseScene();
 
 };
 

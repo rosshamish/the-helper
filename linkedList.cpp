@@ -2,8 +2,17 @@
 #include <stdlib.h>
 #include "linkedList.h"
 
+list* llNew() {
+	list* myList = (list*) malloc(sizeof(list));
+	myList->length = 0;
+	myList->head = NULL;
+	myList->tail = NULL;
+
+	return myList;
+}
+
 /*
-The first node in the list has NULL previous pointer!
+The head node in the list has NULL previous pointer!
 */
 
 void addToEnd(list* myList, Rectangle shape) {
@@ -17,16 +26,16 @@ void addToEnd(list* myList, Rectangle shape) {
 	// 
 	if (myList->length == 0) {
 		// List is currently empty
-		myList->first = newNode;
+		myList->head = newNode;
 	}
 	else {
-		// Add after last element
-		myList->last->next = newNode;
-		newNode->prev = myList->last;;
+		// Add after tail element
+		myList->tail->next = newNode;
+		newNode->prev = myList->tail;;
 	}
 
 	// Adjust end pointer and length
-	myList->last = newNode;
+	myList->tail = newNode;
 	myList->length += 1;
 
 }
@@ -34,7 +43,7 @@ void addToEnd(list* myList, Rectangle shape) {
 void printList(list* mylist) {
 	Serial.begin(9600);
 	// Traverse the entire list, printing each node
-	node* currentNode = mylist->first;
+	node* currentNode = mylist->head;
 	while (currentNode != NULL) {
 		// Print the node
 		Rectangle currentShape = currentNode->shape;

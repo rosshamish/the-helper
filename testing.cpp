@@ -29,18 +29,24 @@ void setup() {
 		one.moveRight(tft);
 	}
 
+	Scene myScene;
+	myScene.addToScene(one);
+	myScene.addToScene(two);
+	myScene.addToScene(three);
+	myScene.traverseScene();
+
 	/*
 	Testing linked list
 	*/
-	Serial.println("linked list tests:");
+	// Serial.println("linked list tests:");
 
 
-	list myList = {0, NULL, NULL};
-	addToEnd(&myList, one);
-	addToEnd(&myList, two);
-	addToEnd(&myList, three);
+	// list myList = {0, NULL, NULL};
+	// addToEnd(&myList, one);
+	// addToEnd(&myList, two);
+	// addToEnd(&myList, three);
 
-	printList(&myList);
+	// printList(&myList);
 
 }
 

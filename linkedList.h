@@ -15,8 +15,8 @@ Single node
 */
 typedef struct link{
 	Rectangle shape; 
-	struct  link * next;
-	struct link * prev;
+	struct  link* next;
+	struct link* prev;
 } node;
 
 /*
@@ -24,13 +24,15 @@ Entire list
 */
 typedef struct {
 	int length; 
-	link * first;
-	link * last;
+	link* head;
+	link* tail;
 } list;
 
 /*
 Methods
 */
+
+list* llNew();
 
 void addToEnd(list* mylist, Rectangle shape);
 
