@@ -19,22 +19,26 @@ void setup() {
 	/*
 	Test the rectangle class
 	*/
-	Rectangle myRect (10, 10, 5, 10);
-	myRect.drawShape(tft);
+	Rectangle one (10, 10, 5, 10);
+	Rectangle two (1, 10, 5, 10);
+	Rectangle three (100, 10, 5, 10);
+
+	one.drawShape(tft);
 
 	for (int i = 0; i < 50; i++) {
-		myRect.moveX(tft);
+		one.moveRight(tft);
 	}
 
 	/*
 	Testing linked list
 	*/
+	Serial.println("linked list tests:");
+
 
 	list myList = {0, NULL, NULL};
-	add_to_end(&myList, 1);
-	add_to_end(&myList, 2);
-	add_to_end(&myList, 3);
-	add_to_end(&myList, 4);
+	addToEnd(&myList, one);
+	addToEnd(&myList, two);
+	addToEnd(&myList, three);
 
 	printList(&myList);
 

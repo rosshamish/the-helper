@@ -1,5 +1,5 @@
 #include "Scene.h"
 
-Scene::addToScene(Rectangle rect) {
+void Scene::addToScene(Rectangle rect) {
 	
 }

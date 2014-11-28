@@ -7,6 +7,14 @@ Rectangle::Rectangle(int x, int y, int height, int width) {
 	this->width = width;
 }
 
+/*
+Getters
+*/
+
+int Rectangle::getX() {
+	return this->x;
+}
+
 void Rectangle::drawShape(Adafruit_ST7735 tft) {
 	tft.drawRect(this->x, this->y, this->height, this->width, 0xFFFF);
 	tft.fillRect(this->x, this->y, this->height, this->width, 0xFFFF);

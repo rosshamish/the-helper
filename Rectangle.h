@@ -23,6 +23,9 @@ public:
 	// Constructor
 	Rectangle(int x, int y, int height, int width);
 
+	// Getters
+	int getX();
+
 	// Methods
 	void drawShape(Adafruit_ST7735 tft);
 	void redrawBackground(Adafruit_ST7735 tft);

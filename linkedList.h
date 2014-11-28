@@ -2,13 +2,21 @@
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
+#include <Arduino.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_ST7735.h>
+#include <SPI.h>
+#include <SD.h>
+
+#include "Rectangle.h"
+
 /*
 Single node
 */
 typedef struct link{
-	int data; 
+	Rectangle shape; 
 	struct  link * next;
-	struct link * previous;
+	struct link * prev;
 } node;
 
 /*
@@ -24,7 +32,7 @@ typedef struct {
 Methods
 */
 
-void addToEnd(list* mylist, int data);
+void addToEnd(list* mylist, Rectangle shape);
 
 void printList(list* myList);
 
