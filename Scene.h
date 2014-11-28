@@ -18,11 +18,21 @@ A grouping shapes will be checked for collisons by this class
 #include <Adafruit_ST7735.h>
 #include <SPI.h>
 
+#include "Rectangle.h"
+
 class Scene {
 private:
-
-public:
 	
+public:
+	// Constructor
+	// Use default
+
+	// Add to scene
+	void addToScene(Rectangle rect);
+
+
+
+
 
 };
 

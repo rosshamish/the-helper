@@ -25,10 +25,13 @@ public:
 
 	// Methods
 	void drawShape(Adafruit_ST7735 tft);
-
 	void redrawBackground(Adafruit_ST7735 tft);
 
-	void moveX(Adafruit_ST7735 tft);
+	// Move
+	void moveRight(Adafruit_ST7735 tft);
+	void moveLeft(Adafruit_ST7735 tft);
+	void moveUp(Adafruit_ST7735 tft);
+	void moveDown(Adafruit_ST7735 tft);
 };
 
 #endif

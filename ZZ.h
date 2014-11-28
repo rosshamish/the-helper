@@ -14,6 +14,14 @@
 #define TFT_DC  7
 #define TFT_RST 8
 
+// Joystick Pins
+const int HORIZ = 0;
+const int VERT = 1;
+const int SEL = 9;
+
+// Linked list
+#include "linkedList.h"
+
 // Class header
 #include "Rectangle.h"
 
