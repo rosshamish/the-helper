@@ -13,10 +13,6 @@ const int HORIZ = 0;
 const int VERT = 1;
 const int SEL = 9;
 
-// upon being setup delegate a shape
-// there is an option to switch the shape via a method
-// adjust for motion method that handles movement of these shape
-
 #include "Rectangle.h"
 
 class JoyStick {
@@ -24,18 +20,20 @@ private:
 	uint16_t vertDefault;
 	uint16_t horizDefault;
 
-	uint16_t vertDiff;
-	uint16_t horizDiff;
-
+	float scrollMultiplier;
 	// just changed to a pointer
 	Rectangle* delegate; 
 public:
 	// Constructor
-	JoyStick();
+	JoyStick(float mult);
 
-	void addDelegate(Rectangle* delegate);
+	// Add shape to control
+	void addDelegate(Rectangle* delegate); 
 
+	// Handle moving of the shape
 	bool adjustPosition(Adafruit_ST7735 tft);
+
+	void checkBounds();
 
 };
 

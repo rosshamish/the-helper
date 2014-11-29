@@ -57,3 +57,23 @@ void Rectangle::moveLeft(Adafruit_ST7735 tft) {
 	this->x = x - 1;
 	drawShape(tft);
 }
+
+void Rectangle::moveUp(Adafruit_ST7735 tft) {
+	redrawBackground(tft);
+
+	this->y = y + 1;
+	drawShape(tft);
+}
+
+void Rectangle::moveDown(Adafruit_ST7735 tft) {
+	redrawBackground(tft);
+
+	this->y = y - 1;
+	drawShape(tft);
+}
+
+
+
+
+
+

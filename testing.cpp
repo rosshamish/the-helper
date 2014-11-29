@@ -33,7 +33,7 @@ void setup() {
 	myScene.addToScene(three);
 	myScene.traverseScene();
 
-	JoyStick myJoy;
+	JoyStick myJoy (1.0);
 	myJoy.addDelegate(&one);
 
 	while (1) {
