@@ -10,11 +10,13 @@
 
 class Screen {
 private:
-
 public:
 	Adafruit_ST7735* tft;
+	int width;
+	int height;
+
 	Screen(Adafruit_ST7735* tft);
-	Screen();
+	//Screen();
 };
 
 #endif

@@ -24,6 +24,7 @@ private:
 	float scrollMultiplier;
 	// just changed to a pointer
 	Rectangle* delegate; 
+	void checkBounds();
 public:
 	// Constructor
 	JoyStick(float mult, Adafruit_ST7735* tft);
@@ -33,8 +34,6 @@ public:
 
 	// Handle moving of the shape
 	bool adjustPosition();
-
-	void checkBounds();
 
 };
 

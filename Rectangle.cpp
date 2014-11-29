@@ -19,6 +19,14 @@ int Rectangle::getY() {
 	return this->y;
 }
 
+int Rectangle::getWidth() {
+	return this->width;
+}
+
+int Rectangle::getHeight() {
+	return this->height;
+}
+
 /*
 Setters 
 */
