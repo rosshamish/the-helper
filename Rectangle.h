@@ -12,8 +12,9 @@ Implementating a box shaped object
 #include <Adafruit_ST7735.h>
 #include <SPI.h>
 
+#include "Screen.h"
 
-class Rectangle {
+class Rectangle: public Screen {
 private:
 	int x;
 	int y;
@@ -21,10 +22,10 @@ private:
 	int width;
 
 	// Shouldn't every need to be called from outside the class
-	void redrawBackground(Adafruit_ST7735 tft);
+	void redrawBackground();
 public:
 	// Constructor
-	Rectangle(int x, int y, int height, int width);
+	Rectangle(int x, int y, int height, int width, Adafruit_ST7735* tft);
 
 	// Getters
 	int getX();
@@ -35,13 +36,13 @@ public:
 	void setY(int newY);
 
 	// Methods
-	void drawShape(Adafruit_ST7735 tft);
+	void drawShape();
 
 	// Move
-	void moveRight(Adafruit_ST7735 tft);
-	void moveLeft(Adafruit_ST7735 tft);
-	void moveUp(Adafruit_ST7735 tft);
-	void moveDown(Adafruit_ST7735 tft);
+	void moveRight();
+	void moveLeft();
+	void moveUp();
+	void moveDown();
 };
 
 #endif

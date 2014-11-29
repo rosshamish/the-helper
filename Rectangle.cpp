@@ -1,6 +1,6 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(int x, int y, int height, int width) {
+Rectangle::Rectangle(int x, int y, int height, int width, Adafruit_ST7735* tft): Screen(tft) {
 	this->x = x;
 	this->y = y;
 	this->height = height;
@@ -32,44 +32,44 @@ void Rectangle::setX(int newX) {
 }
 
 
-void Rectangle::drawShape(Adafruit_ST7735 tft) {
-	tft.drawRect(this->x, this->y, this->height, this->width, 0xFFFF);
-	tft.fillRect(this->x, this->y, this->height, this->width, 0xFFFF);
+void Rectangle::drawShape() {
+	tft->drawRect(this->x, this->y, this->height, this->width, 0xFFFF);
+	tft->fillRect(this->x, this->y, this->height, this->width, 0xFFFF);
 }
 
-void Rectangle::redrawBackground(Adafruit_ST7735 tft) {
-	tft.drawRect(this->x, this->y, this->height, this->width, 0x0000);
-	tft.fillRect(this->x, this->y, this->height, this->width, 0x0000);
+void Rectangle::redrawBackground() {
+	tft->drawRect(this->x, this->y, this->height, this->width, 0x0000);
+	tft->fillRect(this->x, this->y, this->height, this->width, 0x0000);
 }
 
-void Rectangle::moveRight(Adafruit_ST7735 tft) {
+void Rectangle::moveRight() {
 	// Redraw old position
-	redrawBackground(tft);
+	redrawBackground();
 
 	// Adjust and draw new
 	this->x = x + 1;
-	drawShape(tft);
+	drawShape();
 }
 
-void Rectangle::moveLeft(Adafruit_ST7735 tft) {
-	redrawBackground(tft);
+void Rectangle::moveLeft() {
+	redrawBackground();
 
 	this->x = x - 1;
-	drawShape(tft);
+	drawShape();
 }
 
-void Rectangle::moveUp(Adafruit_ST7735 tft) {
-	redrawBackground(tft);
+void Rectangle::moveUp() {
+	redrawBackground();
 
 	this->y = y + 1;
-	drawShape(tft);
+	drawShape();
 }
 
-void Rectangle::moveDown(Adafruit_ST7735 tft) {
-	redrawBackground(tft);
+void Rectangle::moveDown() {
+	redrawBackground();
 
 	this->y = y - 1;
-	drawShape(tft);
+	drawShape();
 }
 
 

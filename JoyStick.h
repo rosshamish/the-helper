@@ -14,8 +14,9 @@ const int VERT = 1;
 const int SEL = 9;
 
 #include "Rectangle.h"
+#include "Screen.h"
 
-class JoyStick {
+class JoyStick: public Screen {
 private:
 	uint16_t vertDefault;
 	uint16_t horizDefault;
@@ -25,13 +26,13 @@ private:
 	Rectangle* delegate; 
 public:
 	// Constructor
-	JoyStick(float mult);
+	JoyStick(float mult, Adafruit_ST7735* tft);
 
 	// Add shape to control
 	void addDelegate(Rectangle* delegate); 
 
 	// Handle moving of the shape
-	bool adjustPosition(Adafruit_ST7735 tft);
+	bool adjustPosition();
 
 	void checkBounds();
 

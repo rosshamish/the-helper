@@ -14,6 +14,7 @@
 #define TFT_DC  7
 #define TFT_RST 8
 
+#include "Screen.h"
 
 // Linked list
 #include "linkedList.h"

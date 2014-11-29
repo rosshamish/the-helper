@@ -1,7 +1,7 @@
 #include "JoyStick.h"
 
 
-JoyStick::JoyStick(float mult) {
+JoyStick::JoyStick(float mult, Adafruit_ST7735* tft): Screen(tft) {
 	// Grab default readings and store in some private variables
 	this->vertDefault = analogRead(VERT);
 	this->horizDefault = analogRead(HORIZ);
@@ -13,7 +13,7 @@ void JoyStick::addDelegate(Rectangle* delegate) {
 	this->delegate = delegate;
 }
 
-bool JoyStick::adjustPosition(Adafruit_ST7735 tft) {
+bool JoyStick::adjustPosition() {
 
 	int16_t vertDiff = analogRead(VERT) - this->vertDefault;
 	int16_t horizDiff = analogRead(HORIZ) - this->horizDefault;
@@ -21,22 +21,22 @@ bool JoyStick::adjustPosition(Adafruit_ST7735 tft) {
 	bool motionHappened = false;
 	// Go down
 	if (vertDiff < -10) {
-		this->delegate->moveDown(tft);
+		this->delegate->moveDown();
 		motionHappened = true;
 	}
 	// Go up
 	if (vertDiff > 10) {
-		this->delegate->moveUp(tft);
+		this->delegate->moveUp();
 		motionHappened = true;
 	}
 	// Go left
 	if (horizDiff < -10) {
-		this->delegate->moveLeft(tft);
+		this->delegate->moveLeft();
 		motionHappened = true;
 	}
 	// Go right
 	if (horizDiff > 10) {
-		this->delegate->moveRight(tft);
+		this->delegate->moveRight();
 		motionHappened = true;
 	}
 
