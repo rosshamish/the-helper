@@ -41,8 +41,13 @@ void setup() {
 	myJoy.addDelegate(&one);
 	myJoy.addScene(&myScene);
 
+	//Rectangle* collidedShape = NULL;
 	while (1) {
 		myJoy.adjustPosition();
+		//if (collidedShape != NULL) {
+		// 	Serial.println("Collision alerted.");
+		// 	collidedShape = NULL;
+		// }
 	}
 
 	// It only makes sense to have JoyStick delegate one object at a time

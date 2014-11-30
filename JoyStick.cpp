@@ -15,7 +15,7 @@ void JoyStick::addDelegate(Rectangle* delegate) {
 	this->delegate = delegate;
 }
 
-bool JoyStick::adjustPosition() {
+Rectangle* JoyStick::adjustPosition() {
 
 	int16_t vertDiff = analogRead(VERT) - this->vertDefault;
 	int16_t horizDiff = analogRead(HORIZ) - this->horizDefault;
@@ -42,16 +42,17 @@ bool JoyStick::adjustPosition() {
 		this->delegate->moveRight();
 		motionHappened = true;
 	}
+	// Ensure still on screenn
 	checkBounds();
 
 	// Check the scene for collision
-	this->scene->checkForCollision(this->delegate);
+	Rectangle* collidedShape = this->scene->checkForCollision(this->delegate);
 
 	// Chill out and go slow
 	delay(10);
 
-	// Alert if motion happened
-	return motionHappened;
+	// Alert if collision happened
+	return collidedShape;
 }
 
 void JoyStick::checkBounds() {

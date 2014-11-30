@@ -54,37 +54,6 @@ void printList(list* mylist) {
 	
 }
 
-// bool checkForCollision_ll(list* myList) {
-// 	// Move accross list and check for overlap
-// 	// every node has to be checked against every other node
-// 	// Compare every node against every other node
-
-// 	node* referenceNode = myList->head;
-// 	// Every node is the refence node EXCEPT the tail node, because it would be redundant
-// 	while (referenceNode->next != NULL) {
-// 		// Starting from the node immediately after the reference node
-// 		node* currentNode = referenceNode->next;
-// 		// All the way till the last node
-// 		while (currentNode != NULL) {
-// 			// if currentNode and reference node overlab, COLLISION
-// 			Rectangle* referenceRect = referenceNode->shape;
-// 			Rectangle* currentRect = currentNode->shape;
-// 			bool collision = false;
-// 			collision = checkOverlap(referenceRect, currentRect);
-
-// 			if (collision) {
-// 				// the two shapes collided pass them back through the parameters
-// 				return true;
-// 			}
-// 			currentNode = currentNode->next;
-// 		}
-// 		referenceNode = referenceNode->next;
-// 	}
-
-// 	// one and two will leave as null if it returns here
-// 	return false;
-// }
-
 // Only check for collisions with the delegate 
 Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate) {
 	node* delegateNode = findNode(myList, delegate);
@@ -93,6 +62,7 @@ Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate) {
 	Rectangle* delegateRect = delegateNode->shape;
 	// Check all other nodes for collision against this node
 	node* currentNode = myList->head;
+	bool collision = false;
 	while (currentNode != NULL) {
 		// Don't compare with itself
 		if (currentNode == delegateNode) {
@@ -100,10 +70,10 @@ Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate) {
 			continue;
 		}
 
-		// Check for collision
+		// Check for collision between current and delegate
 		Rectangle* currentRect = currentNode->shape;
-		bool collision = false;
 		collision = checkOverlap(currentRect, delegateRect);
+
 		if (collision) {
 			return currentRect;
 		}
@@ -128,18 +98,18 @@ node* findNode(list* myList, Rectangle* shape) {
 }
 
 
-bool checkOverlap(Rectangle* referenceRect, Rectangle* currentRect) {
+bool checkOverlap(Rectangle* referenceRect, Rectangle* delegateRect) {
 	// Get image of referenceRect
 	int left = referenceRect->getX();
 	int right = left + referenceRect->getWidth();
 	int top = referenceRect->getY();
 	int bottom = top + referenceRect->getHeight();
 
-	// Get image of currentRect
-	int left2 = currentRect->getX();
-	int right2 = left2 + currentRect->getWidth();
-	int top2 = currentRect->getY();
-	int bottom2 = top2 + currentRect->getHeight();
+	// Get image of delegateRect
+	int leftDel = delegateRect->getX();
+	int rightDel = leftDel + delegateRect->getWidth();
+	int topDel = delegateRect->getY();
+	int bottomDel = topDel + delegateRect->getHeight();
 
 	/*
 	There are four sides the collision could come from
@@ -147,22 +117,19 @@ bool checkOverlap(Rectangle* referenceRect, Rectangle* currentRect) {
 	The first two cases are from the SIDE
 	The last two cases are from the TOP/BOTTOM 
 	*/
-	if(right == left2 && top >= bottom2 && top <= top2) {
-		// collided
+
+	// From above/below
+	if (bottomDel == top && rightDel >= left && rightDel <= right) {
 		return true;
 	}
-	else if(left == right2 && top >= bottom2 && top <= top2) {
-		// collided
+	if (topDel == bottom && rightDel >= left && rightDel <= right) {
 		return true;
 	}
 
-
-	if (top == bottom2 && right >= left2 && right <= right2) {
-		// collided
+	if (rightDel == left && topDel <= bottom && topDel >= top) {
 		return true;
 	}
-	else if(bottom == top2 && right >= left2 && right <= right2) {
-		// collided
+	if (leftDel == right && topDel <= bottom && topDel >= top) {
 		return true;
 	}
 

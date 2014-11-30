@@ -33,7 +33,7 @@ public:
 
 	void traverseScene();
 
-	void checkForCollision(Rectangle* delegate);
+	Rectangle* checkForCollision(Rectangle* delegate);
 
 };
 

@@ -35,7 +35,7 @@ public:
 	void addDelegate(Rectangle* delegate); 
 
 	// Handle moving of the shape
-	bool adjustPosition();
+	Rectangle* adjustPosition();
 
 	// Add scene to control
 	void addScene(Scene* scene);
