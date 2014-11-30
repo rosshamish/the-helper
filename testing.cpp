@@ -4,9 +4,13 @@
 // Display
 Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 
-//Sd2Card card;
-
 void setup() {
+	// Make a scene first
+	// Create some shape and add to this scene
+	// Create a joystick with a screen instance passed in
+	// Store references to scenes in the joystick
+	// When the joystick moves the delegate, check these scenes
+
 	/*
 	The the basic setup
 	*/
@@ -28,13 +32,14 @@ void setup() {
 	three.drawShape();
 
 	Scene myScene;
-	myScene.addToScene(one);
-	myScene.addToScene(two);
-	myScene.addToScene(three);
+	myScene.addToScene(&one);
+	myScene.addToScene(&two);
+	myScene.addToScene(&three);
 	myScene.traverseScene();
 
-	JoyStick myJoy (1.0, &tft);
+	JoyStick myJoy (&tft);
 	myJoy.addDelegate(&one);
+	myJoy.addScene(&myScene);
 
 	while (1) {
 		myJoy.adjustPosition();

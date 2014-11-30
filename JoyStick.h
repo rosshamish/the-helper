@@ -15,25 +15,31 @@ const int SEL = 9;
 
 #include "Rectangle.h"
 #include "Screen.h"
+#include "Scene.h"
 
 class JoyStick: public Screen {
 private:
 	uint16_t vertDefault;
 	uint16_t horizDefault;
+	// Scene references
+	Scene* scene;
 
-	float scrollMultiplier;
 	// just changed to a pointer
 	Rectangle* delegate; 
 	void checkBounds();
+	void checkScene();
 public:
 	// Constructor
-	JoyStick(float mult, Adafruit_ST7735* tft);
+	JoyStick(Adafruit_ST7735* tft);
 
 	// Add shape to control
 	void addDelegate(Rectangle* delegate); 
 
 	// Handle moving of the shape
 	bool adjustPosition();
+
+	// Add scene to control
+	void addScene(Scene* scene);
 
 };
 

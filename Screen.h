@@ -16,7 +16,6 @@ public:
 	int height;
 
 	Screen(Adafruit_ST7735* tft);
-	//Screen();
 };
 
 #endif

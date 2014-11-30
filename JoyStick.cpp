@@ -1,11 +1,13 @@
 #include "JoyStick.h"
 
+// The scene handles the collisons..this makes sense and should be this way
+// For now, make the joystick call the scene checkForCollisions method
+// So the joystick will have to inherit from the scene
 
-JoyStick::JoyStick(float mult, Adafruit_ST7735* tft): Screen(tft) {
+JoyStick::JoyStick(Adafruit_ST7735* tft): Screen(tft) {
 	// Grab default readings and store in some private variables
 	this->vertDefault = analogRead(VERT);
 	this->horizDefault = analogRead(HORIZ);
-	this->scrollMultiplier = mult;
 }
 
 void JoyStick::addDelegate(Rectangle* delegate) {
@@ -42,6 +44,8 @@ bool JoyStick::adjustPosition() {
 	}
 	checkBounds();
 
+	checkScene();
+
 	// Chill out and go slow
 	delay(10);
 
@@ -69,4 +73,18 @@ void JoyStick::checkBounds() {
 		this->delegate->moveDown();
 	}
 }
+
+void JoyStick::addScene(Scene* scene) {
+	this->scene = scene;
+}
+
+void JoyStick::checkScene() {
+	// call the scene method to check itself for collision
+	// set a boolean here
+	this->scene->checkForCollision();
+}
+
+// The delegate moves
+// Invoke checkForCollision on the scene
+// Scene checks the link list for a collision
 

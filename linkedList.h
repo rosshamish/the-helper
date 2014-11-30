@@ -14,7 +14,7 @@
 Single node
 */
 typedef struct link{
-	Rectangle shape; 
+	Rectangle* shape; 
 	struct  link* next;
 	struct link* prev;
 } node;
@@ -34,8 +34,12 @@ Methods
 
 list* llNew();
 
-void addToEnd(list* mylist, Rectangle shape);
+void addToEnd(list* mylist, Rectangle* shape);
 
 void printList(list* myList);
+
+bool checkForCollision_ll(list* myList);
+
+bool checkOverlap(Rectangle* referenceRect, Rectangle* currentRect);
 
 #endif
