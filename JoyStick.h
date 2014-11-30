@@ -33,11 +33,12 @@ public:
 	// Add shape to control
 	void addDelegate(Rectangle* delegate); 
 
+	// Add scene to control
+	void addScene(Scene* scene);
+
 	// Handle moving of the shape
 	Rectangle* adjustPosition();
 
-	// Add scene to control
-	void addScene(Scene* scene);
 
 };
 

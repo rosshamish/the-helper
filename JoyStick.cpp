@@ -46,11 +46,17 @@ Rectangle* JoyStick::adjustPosition() {
 		this->delegate->moveRight();
 		motionHappened = true;
 	}
-	// Ensure still on screen
-	this->scene->checkBounds(this->delegate);
 
-	// Check the scene for collision
-	Rectangle* collidedShape = this->scene->checkForCollision(this->delegate);
+	Rectangle* collidedShape = NULL;
+
+	if (motionHappened) {
+		// Ensure still on screen
+		this->scene->checkBounds(this->delegate);
+
+		// Check the scene for collision
+		collidedShape = this->scene->checkForCollision(this->delegate);
+	}
+
 
 	// Chill out and go slow
 	delay(10);
