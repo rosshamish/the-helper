@@ -38,8 +38,10 @@ void addToEnd(list* mylist, Rectangle* shape);
 
 void printList(list* myList);
 
-bool checkForCollision_ll(list* myList);
+Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate);
 
 bool checkOverlap(Rectangle* referenceRect, Rectangle* currentRect);
+
+node* findNode(list* myList, Rectangle* shape);
 
 #endif

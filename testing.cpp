@@ -23,9 +23,9 @@ void setup() {
 	/*
 	Test the rectangle class
 	*/
-	Rectangle one (10, 10, 5, 10, &tft);
-	Rectangle two (1, 10, 5, 10, &tft);
-	Rectangle three (100, 10, 5, 10, &tft);
+	Rectangle one (10, 15, 5, 10, &tft);
+	Rectangle two (1, 15, 5, 10, &tft);
+	Rectangle three (100, 15, 5, 10, &tft);
 
 	one.drawShape();
 	two.drawShape();
@@ -44,6 +44,15 @@ void setup() {
 	while (1) {
 		myJoy.adjustPosition();
 	}
+
+	// It only makes sense to have JoyStick delegate one object at a time
+	// Check collision between delegate and other objects in its scene
+	// It probably makes sense to automatically add the delegates scene to the joystick
+	// So scenes are packets of shapes. We can add a shape to be delegated, and then
+	// all of the shapes in the delegated shapes scene are check for collision.
+
+	// Obviously, a shape should be allowed to be in multiple scenes
+	// Add the scene...then add a shape from the scene.  So it's good how it is now.
 
 }
 

@@ -27,7 +27,6 @@ private:
 	// just changed to a pointer
 	Rectangle* delegate; 
 	void checkBounds();
-	void checkScene();
 public:
 	// Constructor
 	JoyStick(Adafruit_ST7735* tft);

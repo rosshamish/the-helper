@@ -44,7 +44,8 @@ bool JoyStick::adjustPosition() {
 	}
 	checkBounds();
 
-	checkScene();
+	// Check the scene for collision
+	this->scene->checkForCollision(this->delegate);
 
 	// Chill out and go slow
 	delay(10);
@@ -78,13 +79,4 @@ void JoyStick::addScene(Scene* scene) {
 	this->scene = scene;
 }
 
-void JoyStick::checkScene() {
-	// call the scene method to check itself for collision
-	// set a boolean here
-	this->scene->checkForCollision();
-}
-
-// The delegate moves
-// Invoke checkForCollision on the scene
-// Scene checks the link list for a collision
 
