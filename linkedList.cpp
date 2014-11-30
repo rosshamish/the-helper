@@ -118,18 +118,18 @@ bool checkOverlap(Rectangle* referenceRect, Rectangle* delegateRect) {
 	The last two cases are from the TOP/BOTTOM 
 	*/
 
+	if ((rightDel == left) && (topDel <= bottom) && (topDel >= top)) {
+		return true;
+	}
+	if ((leftDel == right) && (topDel <= bottom) && (topDel >= top)) {
+		return true;
+	}
+
 	// From above/below
 	if (bottomDel == top && rightDel >= left && rightDel <= right) {
 		return true;
 	}
 	if (topDel == bottom && rightDel >= left && rightDel <= right) {
-		return true;
-	}
-
-	if (rightDel == left && topDel <= bottom && topDel >= top) {
-		return true;
-	}
-	if (leftDel == right && topDel <= bottom && topDel >= top) {
 		return true;
 	}
 

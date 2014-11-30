@@ -21,12 +21,11 @@ class JoyStick: public Screen {
 private:
 	uint16_t vertDefault;
 	uint16_t horizDefault;
-	// Scene references
+	// Scene reference
 	Scene* scene;
 
-	// just changed to a pointer
+	// Shape to control
 	Rectangle* delegate; 
-	void checkBounds();
 public:
 	// Constructor
 	JoyStick(Adafruit_ST7735* tft);

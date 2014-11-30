@@ -20,8 +20,9 @@ A grouping shapes will be checked for collisons by this class
 
 #include "Rectangle.h"
 #include "linkedList.h"
+#include "Screen.h"
 
-class Scene {
+class Scene: public Screen {
 private:
 	list* llShapes;
 public:
@@ -34,6 +35,8 @@ public:
 	void traverseScene();
 
 	Rectangle* checkForCollision(Rectangle* delegate);
+
+	void checkBounds(Rectangle* delegate);
 
 };
 

@@ -1,6 +1,6 @@
 #include "Scene.h"
 
-Scene::Scene() {
+Scene::Scene(): Screen(tft) {
 	this->llShapes = llNew();
 }
 
@@ -30,4 +30,25 @@ Rectangle* Scene::checkForCollision(Rectangle* delegate) {
 
 	//collidedShape = NULL;
 
+}
+
+void Scene::checkBounds(Rectangle* delegate) {
+	// Cross reference vs the Screen's size
+
+	// X
+	if (delegate->getX() <= 0) {
+		// bound
+		delegate->moveRight();
+	}
+	else if (delegate->getX() > (this->width - delegate->getWidth())) {
+		delegate->moveLeft();
+	}
+
+	// Y
+	if (delegate->getY() <= 0) {
+		delegate->moveUp();
+	}
+	else if (delegate->getY() > (this->height - delegate->getHeight())) {
+		delegate->moveDown();
+	}
 }

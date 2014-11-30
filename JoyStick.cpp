@@ -15,6 +15,10 @@ void JoyStick::addDelegate(Rectangle* delegate) {
 	this->delegate = delegate;
 }
 
+void JoyStick::addScene(Scene* scene) {
+	this->scene = scene;
+}
+
 Rectangle* JoyStick::adjustPosition() {
 
 	int16_t vertDiff = analogRead(VERT) - this->vertDefault;
@@ -42,8 +46,8 @@ Rectangle* JoyStick::adjustPosition() {
 		this->delegate->moveRight();
 		motionHappened = true;
 	}
-	// Ensure still on screenn
-	checkBounds();
+	// Ensure still on screen
+	this->scene->checkBounds(this->delegate);
 
 	// Check the scene for collision
 	Rectangle* collidedShape = this->scene->checkForCollision(this->delegate);
@@ -55,29 +59,5 @@ Rectangle* JoyStick::adjustPosition() {
 	return collidedShape;
 }
 
-void JoyStick::checkBounds() {
-	// Cross reference vs the Screen's size
-
-	// X
-	if (this->delegate->getX() <= 0) {
-		// bound
-		this->delegate->moveRight();
-	}
-	else if (this->delegate->getX() > (this->width - this->delegate->getWidth())) {
-		this->delegate->moveLeft();
-	}
-
-	// Y
-	if (this->delegate->getY() <= 0) {
-		this->delegate->moveUp();
-	}
-	else if (this->delegate->getY() > (this->height - this->delegate->getHeight())) {
-		this->delegate->moveDown();
-	}
-}
-
-void JoyStick::addScene(Scene* scene) {
-	this->scene = scene;
-}
 
 
