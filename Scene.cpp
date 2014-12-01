@@ -26,10 +26,10 @@ void Scene::checkBounds(Rectangle* delegate) {
 
 	// Y
 	if (delegate->getY() <= 0) {
-		delegate->moveUp();
+		delegate->moveDown();
 	}
 	else if ((delegate->getY() + delegate->getHeight()) > this->height) {
-		delegate->moveDown();
+		delegate->moveUp();
 	}
 }
 

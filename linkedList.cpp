@@ -97,7 +97,7 @@ node* findNode(list* myList, Rectangle* shape) {
 	return NULL;
 }
 
-
+// Compare each Rectangle with the delegate
 bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 
 	// Get image of referenceRect
@@ -112,6 +112,10 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 	int yDel = delegateRect->getY();
 	int heightDel = delegateRect->getHeight();
 
+	Serial.begin(9600);
+	Serial.println(yDel);
+	delay(20);
+
 	// int left = referenceRect->getX();
 	// int right = left + referenceRect->getWidth();
 	// int top = referenceRect->getY();
@@ -123,46 +127,23 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 	// int topDel = delegateRect->getY();
 	// int bottomDel = topDel + delegateRect->getHeight();
 
+	// if (x < xDel + widthDel &&
+	// 	x + width > xDel    &&
+	// 	y < yDel + heightDel &&
+	// 	height + y > yDel) {
+	// 	// Collision detected
+	// 	// Freeze it where it is
+	// 	Serial.begin(9600);
+	// 	Serial.println("collision");
+	// 	delay(20);
 
+	// 	return true;
+	// }
 
-
-	if (x < xDel + widthDel &&
-		x + width > xDel    &&
-		y < yDel + heightDel &&
-		height + y > yDel) {
-		// Collision detected
-		// Freeze it where it is
+	// Collision from the bottom
+	if ((yDel + heightDel) == y) {
 		Serial.begin(9600);
-		if (xDel < x) {
-			// from the left
-			// Serial.println(delegateRect->getX());
-			// Serial.println(referenceRect->getX());
-
-			delegateRect->setX(referenceRect->getX() - delegateRect->getWidth() - 1);
-		}
-		if (xDel > x) {
-			// from the right
-			// Serial.println(delegateRect->getX());
-			// Serial.println(referenceRect->getX());
-
-			delegateRect->setX(referenceRect->getX() + referenceRect->getWidth() + 1);
-		}
-		if (yDel > y) {
-			// // from the bottom
-			// Serial.println(delegateRect->getX());
-			// Serial.println(referenceRect->getX());
-
-			delegateRect->setY(referenceRect->getY() + referenceRect->getHeight() + 1);
-		}
-		if (yDel < y) {
-			// from the top
-			// Serial.println(delegateRect->getX());
-			// Serial.println(referenceRect->getX());
-
-			delegateRect->setY(referenceRect->getY() - delegateRect->getHeight() + 1);
-		}
-
-		return true;
+		Serial.println("bottom");
 	}
 
 	return false;

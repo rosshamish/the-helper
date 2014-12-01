@@ -25,7 +25,7 @@ void setup() {
 	*/
 	Rectangle one (10, 15, 5, 20, &tft);
 	Rectangle two (30, 15, 5, 20, &tft);
-	Rectangle three (100, 15, 5, 20, &tft);
+	Rectangle three (50, 15, 5, 20, &tft);
 
 	one.drawShape();
 	two.drawShape();

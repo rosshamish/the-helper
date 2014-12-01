@@ -53,7 +53,6 @@ void Rectangle::redrawBackground() {
 void Rectangle::moveRight() {
 	// Redraw old position
 	redrawBackground();
-
 	// Adjust and draw new
 	this->x = x + 1;
 	drawShape();
@@ -69,14 +68,14 @@ void Rectangle::moveLeft() {
 void Rectangle::moveUp() {
 	redrawBackground();
 
-	this->y = y + 1;
+	this->y = y - 1;
 	drawShape();
 }
 
 void Rectangle::moveDown() {
 	redrawBackground();
 
-	this->y = y - 1;
+	this->y = y + 1;
 	drawShape();
 }
 

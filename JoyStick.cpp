@@ -30,13 +30,13 @@ Rectangle* JoyStick::adjustPosition() {
 	bool motionHappened = false;
 	// Go down
 	if (vertDiff < -10) {
-		this->delegate->moveDown();
+		this->delegate->moveUp();
 		// Check to make sure in bounds
 		motionHappened = true;
 	}
 	// Go up
 	if (vertDiff > 10 && !motionHappened) {
-		this->delegate->moveUp();
+		this->delegate->moveDown();
 		motionHappened = true;
 	}
 	// Go left
