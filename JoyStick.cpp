@@ -35,17 +35,17 @@ Rectangle* JoyStick::adjustPosition() {
 		motionHappened = true;
 	}
 	// Go up
-	if (vertDiff > 10) {
+	if (vertDiff > 10 && !motionHappened) {
 		this->delegate->moveUp();
 		motionHappened = true;
 	}
 	// Go left
-	if (horizDiff < -10) {
+	if (horizDiff < -10 && !motionHappened) {
 		this->delegate->moveLeft();
 		motionHappened = true;
 	}
 	// Go right
-	if (horizDiff > 10) {
+	if (horizDiff > 10 && !motionHappened) {
 		this->delegate->moveRight();
 		motionHappened = true;
 	}
