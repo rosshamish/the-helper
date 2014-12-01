@@ -33,16 +33,13 @@ private:
 	
 	// Only control one scene, one delegate at a time
 	Scene* scene;
-	Rectangle* delegate; 
+	Rectangle* delegate;
+
 public:
 	// Constructor
 	JoyStick(Adafruit_ST7735* tft);
 
-	// Add shape to control
-	void addDelegate(Rectangle* delegate); 
-
-	// Add scene to control
-	void addScene(Scene* scene);
+	void addHandle(Scene* scene, Rectangle* delegate);
 
 	// Handle moving of the shape (call checkForCollision is moved)
 	Rectangle* adjustPosition();

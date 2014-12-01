@@ -52,3 +52,16 @@ Rectangle* Scene::checkForCollision(Rectangle* delegate) {
 	return NULL;
 }
 
+void Scene::drawScene(bool original) {
+	// Clear the screen
+	//this->tft->fillScreen(0);
+
+	drawEachElement(llShapes, original);
+}
+
+void Scene::hideScene() {
+	// redraw background on all elements of the scene
+	hideEachElement(llShapes);
+}
+
+

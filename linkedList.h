@@ -48,4 +48,8 @@ Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate);
 
 bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* currentRect);
 
+void drawEachElement(list* myList, bool original);
+
+void hideEachElement(list* myList);
+
 #endif

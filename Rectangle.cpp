@@ -3,6 +3,9 @@
 Rectangle::Rectangle(int x, int y, int width, int height, Adafruit_ST7735* tft, int color): Screen(tft) {
 	this->x = x;
 	this->y = y;
+	this->originalX = x;
+	this->originalY = y;
+
 	this->width = width;
 	this->height = height;
 	this->color = color;
@@ -28,6 +31,14 @@ int Rectangle::getHeight() {
 	return this->height;
 }
 
+int Rectangle::getOriginalX() {
+	return this->originalX;
+}
+
+int Rectangle::getOriginalY() {
+	return this->originalY;
+}
+
 /*
 Setters 
 */
@@ -47,6 +58,10 @@ void Rectangle::setColor(int color) {
 /*
 Movement and Drawing
 */
+
+void Rectangle::hideShape() {
+	redrawBackground();
+}
 
 void Rectangle::drawShape() {
 	tft->drawRect(this->x, this->y, this->width, this->height, this->color);

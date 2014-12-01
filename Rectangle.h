@@ -22,6 +22,9 @@ private:
 	int width;
 	int color;
 
+	int originalX;
+	int originalY;
+
 public:
 	// Constructor
 	Rectangle(int x, int y, int height, int width, Adafruit_ST7735* tft, int color);
@@ -31,6 +34,8 @@ public:
 	int getY();
 	int getWidth();
 	int getHeight();
+	int getOriginalX();
+	int getOriginalY();
 
 	// Setters
 	void setX(int newX);
@@ -40,6 +45,8 @@ public:
 	void drawShape();
 	void redrawBackground();
 	void setColor(int color);
+	void hideShape();
+
 	// Move
 	void moveRight();
 	void moveLeft();

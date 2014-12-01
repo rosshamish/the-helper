@@ -21,25 +21,49 @@ void setup() {
   	tft.fillScreen(0);
 
 	/*
-	Test the rectangle class
+	Create some shapes
 	*/
 	Rectangle one (10, 30, 5, 20, &tft, 0xFF00);
 	Rectangle two (30, 30, 5, 20, &tft, 0xFFFF);
 	Rectangle three (50, 30, 5, 20, &tft, 0xFFFF);
+	Rectangle four (100, 100, 5, 20, &tft, 0xFFFF);
+	Rectangle five (70, 100, 5, 20, &tft, 0xFFFF);
 
+	// you can draw a shape individually
 	one.drawShape();
-	two.drawShape();
-	three.drawShape();
 
+	// and hide a shape individually
+	one.hideShape();
+
+
+	/*
+	Create some scenes and add some shapes to them
+	So shapes can live alone, or in a scene
+	*/
 	Scene myScene;
 	myScene.addToScene(&one);
 	myScene.addToScene(&two);
 	myScene.addToScene(&three);
-	myScene.traverseScene();
 
+	Scene secondScene;
+	secondScene.addToScene(&four);
+	secondScene.addToScene(&five);
+
+	// draw an entire scene
+	myScene.drawScene(true);
+
+
+	/*
+	Attach joystick to a delegate within a scene
+	*/
 	JoyStick myJoy (&tft);
-	myJoy.addDelegate(&one);
-	myJoy.addScene(&myScene);
+	myJoy.addHandle(&myScene, &one);
+
+	/*
+	Check for collisions within this scene
+	Respond to the collision by changing the active scene
+	*/
+	bool toggleState = true;
 
 	Rectangle* collidedShape = NULL;
 	while (1) {
@@ -48,6 +72,25 @@ void setup() {
 			one.setColor(0xFFFF);
 			Serial.println("Collision alerted.");
 			collidedShape = NULL;
+
+			if (toggleState) {
+				// Hide the current scene
+				myScene.hideScene();
+
+				// Draw the new scene in original state
+				secondScene.drawScene(true);
+
+				// Attach the new delegate and scene
+				myJoy.addHandle(&secondScene, &four);
+				toggleState = false;
+			}
+			else {
+				secondScene.hideScene();
+				myScene.drawScene(true);
+				myJoy.addHandle(&myScene, &one);
+
+				toggleState = true;
+			}
 		}
 	}
 

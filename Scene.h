@@ -33,6 +33,10 @@ public:
 
 	void checkBounds(Rectangle* delegate);
 
+	void drawScene(bool original);
+
+	void hideScene();
+
 };
 
 #endif

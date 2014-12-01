@@ -6,13 +6,9 @@ JoyStick::JoyStick(Adafruit_ST7735* tft): Screen(tft) {
 	this->horizDefault = analogRead(HORIZ);
 }
 
-void JoyStick::addDelegate(Rectangle* delegate) {
-	// Assign delegate
-	this->delegate = delegate;
-}
-
-void JoyStick::addScene(Scene* scene) {
+void JoyStick::addHandle(Scene* scene, Rectangle* delegate) {
 	this->scene = scene;
+	this->delegate = delegate;
 }
 
 Rectangle* JoyStick::adjustPosition() {

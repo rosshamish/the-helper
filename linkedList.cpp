@@ -54,6 +54,40 @@ void printList(list* mylist) {
 	
 }
 
+// Draw all the elements
+void drawEachElement(list* myList, bool original) {
+	// start at the head
+	node* currentNode = myList->head;
+	while (currentNode != NULL) {
+		// draw this node
+		Rectangle* currentRect = currentNode->shape;
+
+		// revert back to old state
+		if (original) {
+			currentRect->setX(currentRect->getOriginalX());
+			currentRect->setY(currentRect->getOriginalY());
+		}
+
+		currentRect->drawShape();
+
+		// increment
+		currentNode = currentNode->next;
+	}
+}
+
+void hideEachElement(list* myList) {
+	// start at the head
+	node* currentNode = myList->head;
+	while (currentNode != NULL) {
+		// hide this node
+		Rectangle* currentRect = currentNode->shape;
+		currentRect->redrawBackground();
+
+		// increment
+		currentNode = currentNode->next;
+	}
+}
+
 // Only check for collisions with the DELEGATE! 
 Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate) {
 	node* delegateNode = findNode(myList, delegate);
