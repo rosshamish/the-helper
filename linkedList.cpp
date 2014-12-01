@@ -112,38 +112,55 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 	int yDel = delegateRect->getY();
 	int heightDel = delegateRect->getHeight();
 
-	Serial.begin(9600);
-	Serial.println(yDel);
-	delay(20);
+	if (x < xDel + widthDel &&
+		x + width > xDel    &&
+		y < yDel + heightDel &&
+		height + y > yDel) {
+		// Collision detected
+		// Freeze it where it is
 
-	// int left = referenceRect->getX();
-	// int right = left + referenceRect->getWidth();
-	// int top = referenceRect->getY();
-	// int bottom = top + referenceRect->getHeight();
-
-	// // Get image of delegateRect
-	// int leftDel = delegateRect->getX();
-	// int rightDel = leftDel + delegateRect->getWidth();
-	// int topDel = delegateRect->getY();
-	// int bottomDel = topDel + delegateRect->getHeight();
-
-	// if (x < xDel + widthDel &&
-	// 	x + width > xDel    &&
-	// 	y < yDel + heightDel &&
-	// 	height + y > yDel) {
-	// 	// Collision detected
-	// 	// Freeze it where it is
-	// 	Serial.begin(9600);
-	// 	Serial.println("collision");
-	// 	delay(20);
-
-	// 	return true;
-	// }
-
-	// Collision from the bottom
-	if ((yDel + heightDel) == y) {
+		// ALL THE PARAMETERS ARE AS EXPECTED!!!
 		Serial.begin(9600);
-		Serial.println("bottom");
+		Serial.println("collision");
+		delay(20);
+
+		//Serial.println(yDel);
+
+		// Check if it comes from the bottom or top
+		if (yDel >= (y + height - 1)) {
+			// bottom
+			// freeze at bottom
+			delegateRect->redrawBackground();
+			referenceRect->drawShape();
+			delegateRect->setY(y + height + 1);
+			delegateRect->drawShape();
+			return true;
+		}
+
+		// top is severly fucked
+		if ((yDel + heightDel) <= (y + 1)) {
+			// top
+			delegateRect->setY(y - 2);
+			delegateRect->drawShape();
+			return true;
+		}
+
+		if ((xDel + widthDel) <= (x + 1)) {
+			// left
+			Serial.println("left");
+			delegateRect->setX(x);
+			delegateRect->drawShape();
+			return true;
+		}
+		if (xDel >= (x + width - 1)) {
+			// right
+			delegateRect->redrawBackground();
+			referenceRect->drawShape();
+			delegateRect->setX(x + width + 1);
+			delegateRect->drawShape();
+			return true;
+		}
+
 	}
 
 	return false;

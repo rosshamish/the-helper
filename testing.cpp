@@ -23,9 +23,9 @@ void setup() {
 	/*
 	Test the rectangle class
 	*/
-	Rectangle one (10, 15, 5, 20, &tft);
-	Rectangle two (30, 15, 5, 20, &tft);
-	Rectangle three (50, 15, 5, 20, &tft);
+	Rectangle one (10, 30, 5, 20, &tft);
+	Rectangle two (30, 30, 5, 20, &tft);
+	Rectangle three (50, 30, 5, 20, &tft);
 
 	one.drawShape();
 	two.drawShape();
