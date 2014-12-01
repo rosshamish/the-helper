@@ -20,12 +20,11 @@ private:
 	int y;
 	int height;
 	int width;
-
-	// Shouldn't every need to be called from outside the class
+	int color;
 
 public:
 	// Constructor
-	Rectangle(int x, int y, int height, int width, Adafruit_ST7735* tft);
+	Rectangle(int x, int y, int height, int width, Adafruit_ST7735* tft, int color);
 
 	// Getters
 	int getX();
@@ -39,8 +38,8 @@ public:
 
 	// Methods
 	void drawShape();
-		void redrawBackground();
-
+	void redrawBackground();
+	void setColor(int color);
 	// Move
 	void moveRight();
 	void moveLeft();

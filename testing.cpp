@@ -23,9 +23,9 @@ void setup() {
 	/*
 	Test the rectangle class
 	*/
-	Rectangle one (10, 30, 5, 20, &tft);
-	Rectangle two (30, 30, 5, 20, &tft);
-	Rectangle three (50, 30, 5, 20, &tft);
+	Rectangle one (10, 30, 5, 20, &tft, 0xFF00);
+	Rectangle two (30, 30, 5, 20, &tft, 0xFFFF);
+	Rectangle three (50, 30, 5, 20, &tft, 0xFFFF);
 
 	one.drawShape();
 	two.drawShape();
@@ -45,6 +45,7 @@ void setup() {
 	while (1) {
 		collidedShape = myJoy.adjustPosition();
 		if (collidedShape != NULL) {
+			one.setColor(0xFFFF);
 			Serial.println("Collision alerted.");
 			collidedShape = NULL;
 		}
