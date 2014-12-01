@@ -54,12 +54,11 @@ void printList(list* mylist) {
 	
 }
 
-// Only check for collisions with the delegate 
+// Only check for collisions with the DELEGATE! 
 Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate) {
 	node* delegateNode = findNode(myList, delegate);
-	//Serial.begin(9600);
-	// Serial.println("found node");
 	Rectangle* delegateRect = delegateNode->shape;
+
 	// Check all other nodes for collision against this node
 	node* currentNode = myList->head;
 	bool collision = false;
@@ -84,6 +83,7 @@ Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate) {
 	return NULL;
 }
 
+// Used in checkForCollison_ll to locate the delegate
 node* findNode(list* myList, Rectangle* shape) {
 	// Start from the head
 	node* currentNode = myList->head;
@@ -97,7 +97,7 @@ node* findNode(list* myList, Rectangle* shape) {
 	return NULL;
 }
 
-// Compare each Rectangle with the delegate
+// Do the hard work to find collision and know which side collision is on
 bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 
 	// Get image of referenceRect
@@ -112,24 +112,23 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 	int yDel = delegateRect->getY();
 	int heightDel = delegateRect->getHeight();
 
+	// Is there a collision?
 	if (x < xDel + widthDel &&
 		x + width > xDel    &&
 		y < yDel + heightDel &&
 		height + y > yDel) {
-		// Collision detected
-		// Freeze it where it is
 
-		// ALL THE PARAMETERS ARE AS EXPECTED!!!
 		Serial.begin(9600);
 		Serial.println("collision");
 		delay(20);
 
-		//Serial.println(yDel);
+		/*
+		Find which side the collision occured on
+		Freeze the delegate there (can't go through collided object)
+		*/
 
-		// Check if it comes from the bottom or top
+		// Bottom
 		if (yDel >= (y + height - 1)) {
-			// bottom
-			// freeze at bottom
 			delegateRect->redrawBackground();
 			referenceRect->drawShape();
 			delegateRect->setY(y + height + 1);
@@ -137,8 +136,8 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 			return true;
 		}
 
+		// Top
 		if ((yDel + heightDel) <= (y + 1)) {
-			// top
 			delegateRect->redrawBackground();
 			referenceRect->drawShape();
 			delegateRect->setY(y - heightDel - 1);
@@ -146,16 +145,17 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 			return true;
 		}
 
+		// Left
 		if ((xDel + widthDel) <= (x + 1)) {
-			// left
 			delegateRect->redrawBackground();
 			referenceRect->drawShape();
 			delegateRect->setX(x - widthDel - 1);
 			delegateRect->drawShape();
 			return true;
 		}
+
+		// Right
 		if (xDel >= (x + width - 1)) {
-			// right
 			delegateRect->redrawBackground();
 			referenceRect->drawShape();
 			delegateRect->setX(x + width + 1);
@@ -164,7 +164,8 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 		}
 
 	}
-
-	return false;
-
+	// No collision
+	else {
+		return false;
+	}
 }

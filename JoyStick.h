@@ -1,3 +1,12 @@
+/*
+Joystick class : subclass of Screen
+
+Responsible instigating movement by reading the joystick pins
+Controls one delegate and one scene
+Calls checkForMotion on the scene it delegates
+
+*/
+
 
 #ifndef JOYSTICK_H
 #define JOYSTICK_H
@@ -21,10 +30,9 @@ class JoyStick: public Screen {
 private:
 	uint16_t vertDefault;
 	uint16_t horizDefault;
-	// Scene reference
+	
+	// Only control one scene, one delegate at a time
 	Scene* scene;
-
-	// Shape to control
 	Rectangle* delegate; 
 public:
 	// Constructor
@@ -36,10 +44,8 @@ public:
 	// Add scene to control
 	void addScene(Scene* scene);
 
-	// Handle moving of the shape
+	// Handle moving of the shape (call checkForCollision is moved)
 	Rectangle* adjustPosition();
-
-
 };
 
 #endif

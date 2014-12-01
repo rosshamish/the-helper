@@ -39,6 +39,9 @@ void Rectangle::setX(int newX) {
 	this->x = newX;
 }
 
+/*
+Movement and Drawing
+*/
 
 void Rectangle::drawShape() {
 	tft->drawRect(this->x, this->y, this->width, this->height, 0xFFFF);

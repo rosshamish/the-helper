@@ -1,9 +1,5 @@
 #include "JoyStick.h"
 
-// The scene handles the collisons..this makes sense and should be this way
-// For now, make the joystick call the scene checkForCollisions method
-// So the joystick will have to inherit from the scene
-
 JoyStick::JoyStick(Adafruit_ST7735* tft): Screen(tft) {
 	// Grab default readings and store in some private variables
 	this->vertDefault = analogRead(VERT);

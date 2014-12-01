@@ -1,3 +1,7 @@
+/*
+Linked List used by Scene to store shapes
+*/
+
 
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
@@ -38,10 +42,10 @@ void addToEnd(list* mylist, Rectangle* shape);
 
 void printList(list* myList);
 
+node* findNode(list* myList, Rectangle* shape);
+
 Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate);
 
 bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* currentRect);
-
-node* findNode(list* myList, Rectangle* shape);
 
 #endif

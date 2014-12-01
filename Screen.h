@@ -1,3 +1,9 @@
+/*
+Screen class : Superclass of JoyStick
+
+Provides tft init and screen dimensions
+*/
+
 
 #ifndef SCREEN_H
 #define SCREEN_H

@@ -34,7 +34,8 @@ void Scene::checkBounds(Rectangle* delegate) {
 }
 
 /*
-This will be constantly called when looking for its position
+@Callee: Joystick.cpp (on every movement of delegate)
+@Returns: Rectangle* of collided shape (or null)
 */
 Rectangle* Scene::checkForCollision(Rectangle* delegate) {
 	// The linked list will check if there are any collisions
