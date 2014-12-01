@@ -72,7 +72,7 @@ Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate) {
 
 		// Check for collision between current and delegate
 		Rectangle* currentRect = currentNode->shape;
-		collision = checkOverlap(currentRect, delegateRect);
+		collision = checkEachCollisionSide(currentRect, delegateRect);
 
 		if (collision) {
 			return currentRect;
@@ -98,40 +98,53 @@ node* findNode(list* myList, Rectangle* shape) {
 }
 
 
-bool checkOverlap(Rectangle* referenceRect, Rectangle* delegateRect) {
+bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 	// Get image of referenceRect
-	int left = referenceRect->getX();
-	int right = left + referenceRect->getWidth();
-	int top = referenceRect->getY();
-	int bottom = top + referenceRect->getHeight();
+	int x = referenceRect->getX();
+	int width = referenceRect->getWidth();
+	int y = referenceRect->getY();
+	int height = referenceRect->getHeight();
 
 	// Get image of delegateRect
-	int leftDel = delegateRect->getX();
-	int rightDel = leftDel + delegateRect->getWidth();
-	int topDel = delegateRect->getY();
-	int bottomDel = topDel + delegateRect->getHeight();
+	int xDel = delegateRect->getX();
+	int widthDel = delegateRect->getWidth();
+	int yDel = delegateRect->getY();
+	int heightDel = delegateRect->getHeight();
 
 	/*
 	There are four sides the collision could come from
 	
-	The first two cases are from the SIDE
-	The last two cases are from the TOP/BOTTOM 
 	*/
 
-	if ((rightDel == left) && (topDel <= bottom) && (topDel >= top)) {
-		return true;
-	}
-	if ((leftDel == right) && (topDel <= bottom) && (topDel >= top)) {
+	if (x < xDel + widthDel &&
+		x + width > xDel    &&
+		y < yDel + heightDel &&
+		height + y > yDel) {
+		// Collision detected
+		// Freeze it where it is
+		delay(1000);
 		return true;
 	}
 
-	// From above/below
-	if (bottomDel == top && rightDel >= left && rightDel <= right) {
-		return true;
-	}
-	if (topDel == bottom && rightDel >= left && rightDel <= right) {
-		return true;
-	}
+	// if ((rightDel == left) && (topDel <= bottom) && (topDel >= top)) {
+	// 	// Move the delegate one back
+	// 	delegateRect->setX(delegateRect->getX() - 1);
+	// 	return true;
+	// }
+	// if ((leftDel == right) && (topDel <= bottom) && (topDel >= top)) {
+	// 	delegateRect->setX(delegateRect->getX() + 2);
+	// 	return true;
+	// }
+
+	// // From above/below
+	// if (bottomDel == top && rightDel >= left && rightDel <= right) {
+	// 	delegateRect->setY(delegateRect->getY() - 1);
+	// 	return true;
+	// }
+	// if (topDel == bottom && rightDel >= left && rightDel <= right) {
+	// 	delegateRect->setY(delegateRect->getY() + 1);
+	// 	return true;
+	// }
 
 	return false;
 

@@ -38,6 +38,8 @@ public:
 
 	void checkBounds(Rectangle* delegate);
 
+	void preventOverlap(Rectangle* delegate, Rectangle* collidedShape);
+
 };
 
 #endif

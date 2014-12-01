@@ -20,6 +20,9 @@ void JoyStick::addScene(Scene* scene) {
 }
 
 Rectangle* JoyStick::adjustPosition() {
+	/*
+	If movement is necessary, then move
+	*/
 
 	int16_t vertDiff = analogRead(VERT) - this->vertDefault;
 	int16_t horizDiff = analogRead(HORIZ) - this->horizDefault;
@@ -47,6 +50,10 @@ Rectangle* JoyStick::adjustPosition() {
 		motionHappened = true;
 	}
 
+	/*
+	Things to do if there is movement
+	*/
+
 	Rectangle* collidedShape = NULL;
 
 	if (motionHappened) {
@@ -55,11 +62,11 @@ Rectangle* JoyStick::adjustPosition() {
 
 		// Check the scene for collision
 		collidedShape = this->scene->checkForCollision(this->delegate);
+
 	}
 
-
 	// Chill out and go slow
-	delay(10);
+	delay(20);
 
 	// Alert if collision happened
 	return collidedShape;

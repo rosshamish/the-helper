@@ -40,7 +40,7 @@ void printList(list* myList);
 
 Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate);
 
-bool checkOverlap(Rectangle* referenceRect, Rectangle* currentRect);
+bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* currentRect);
 
 node* findNode(list* myList, Rectangle* shape);
 
