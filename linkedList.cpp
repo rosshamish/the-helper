@@ -137,18 +137,20 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 			return true;
 		}
 
-		// top is severly fucked
 		if ((yDel + heightDel) <= (y + 1)) {
 			// top
-			delegateRect->setY(y - 2);
+			delegateRect->redrawBackground();
+			referenceRect->drawShape();
+			delegateRect->setY(y - heightDel - 1);
 			delegateRect->drawShape();
 			return true;
 		}
 
 		if ((xDel + widthDel) <= (x + 1)) {
 			// left
-			Serial.println("left");
-			delegateRect->setX(x);
+			delegateRect->redrawBackground();
+			referenceRect->drawShape();
+			delegateRect->setX(x - widthDel - 1);
 			delegateRect->drawShape();
 			return true;
 		}
