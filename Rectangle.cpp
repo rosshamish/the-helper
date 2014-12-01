@@ -1,10 +1,10 @@
 #include "Rectangle.h"
 
-Rectangle::Rectangle(int x, int y, int height, int width, Adafruit_ST7735* tft): Screen(tft) {
+Rectangle::Rectangle(int x, int y, int width, int height, Adafruit_ST7735* tft): Screen(tft) {
 	this->x = x;
 	this->y = y;
-	this->height = height;
 	this->width = width;
+	this->height = height;
 }
 
 /*
@@ -41,13 +41,13 @@ void Rectangle::setX(int newX) {
 
 
 void Rectangle::drawShape() {
-	tft->drawRect(this->x, this->y, this->height, this->width, 0xFFFF);
-	tft->fillRect(this->x, this->y, this->height, this->width, 0xFFFF);
+	tft->drawRect(this->x, this->y, this->width, this->height, 0xFFFF);
+	tft->fillRect(this->x, this->y, this->width, this->height, 0xFFFF);
 }
 
 void Rectangle::redrawBackground() {
-	tft->drawRect(this->x, this->y, this->height, this->width, 0x0000);
-	tft->fillRect(this->x, this->y, this->height, this->width, 0x0000);
+	tft->drawRect(this->x, this->y, this->width, this->height, 0x0000);
+	tft->fillRect(this->x, this->y, this->width, this->height, 0x0000);
 }
 
 void Rectangle::moveRight() {

@@ -20,7 +20,7 @@ void Scene::checkBounds(Rectangle* delegate) {
 		// bound
 		delegate->moveRight();
 	}
-	else if (delegate->getX() > (this->width - delegate->getWidth())) {
+	else if ((delegate->getX() + delegate->getWidth()) > this->width) {
 		delegate->moveLeft();
 	}
 
@@ -28,7 +28,7 @@ void Scene::checkBounds(Rectangle* delegate) {
 	if (delegate->getY() <= 0) {
 		delegate->moveUp();
 	}
-	else if (delegate->getY() > (this->height - delegate->getHeight())) {
+	else if ((delegate->getY() + delegate->getHeight()) > this->height) {
 		delegate->moveDown();
 	}
 }
@@ -42,8 +42,8 @@ Rectangle* Scene::checkForCollision(Rectangle* delegate) {
 	collidedShape = checkForCollision_ll(llShapes, delegate);
 
 	if (collidedShape != NULL) {
-		Serial.begin(9600);
-		Serial.println("there was collision.");
+		//Serial.begin(9600);
+		//Serial.println("there was collision.");
 
 		return collidedShape;
 	}
