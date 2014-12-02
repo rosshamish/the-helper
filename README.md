@@ -2,6 +2,7 @@ Spark
 =====
 
 An Arduino graphics library for collision, movement, and scenes.
+
 Made for the Adafruit TFT display.
 
 Created by Andrew Hoskins and Nathan Mueller.
@@ -71,16 +72,26 @@ Now, lets add a *scene*.  A scene is a the container holding a bunch of shapes.
     myScene.addToScene(&one);
     myScene.addToScene(&two);
 
-We have created a scene, and added two of our shapes to the scene.  You can use multiple scenes if you'd like. The same shape can even appear in more than one scene.  Scenes will be discussed in more detail later.    
+We have created a scene, and added two of our shapes to the scene.  You can use multiple scenes if you'd like and the same shape can appear in more than one scene.
+
+We can draw the entire at once.
+
+    myScene.drawScene(true);
+    
+There are two ways to draw scenes: in their original state, or most recent state.  The `true` argument means to draw all the shapes in the scene in their original positions (with respect to when they were constructed).  If `false` was supplied, this would draw the shapes based on their last recorded x-y coordinates (i.e., coordinates after moved by the joystick).
+
+We can also hide an entire scene.  This will not remove the shapes from the scene or deconstruct the scene, but simply not display the scene. 
 
 ### Motion ###
 
-To add some motion to our scene lets initiate a *joystick*.  The joystick is in charge of controlling the motion of one shape at time.  But since shapes can be associated with multiple scenes, specify that scene to be controlled as well. 
+To add some motion to our scene lets initiate a *joystick*.  The joystick is in charge of controlling the motion of one shape at time.  But since shapes can be associated with multiple scenes, specify the scene to be controlled also. 
 
     JoyStick myJoy (&tft);
     myJoy.addHandle(&myScene, &one);
     
 The shape controlled by the joystick can be changed at any time by using this method.
+
+Generally, changing the displayed scene and changing the handle on the joystick go hand-in-hand.
 
 To check the controlled shape for movement, use the `adjustPosition()` method (likely in a loop):
 
@@ -90,7 +101,7 @@ To check the controlled shape for movement, use the `adjustPosition()` method (l
     
 ### Collisions ###
 
-One of the main purposes of *scenes* is to define a scope for collisions.  Shapes within a scene are checked for collisions amoungst other shapes in the same scene.  However, if a shape is not in a scene (or in a different scene) it will **not** be checked for collisions with these shapes.
+One of the main purposes of *scenes* is to define a scope for collisions.  Shapes within a scene are checked for collisions among other shapes in the same scene.  However, if a shape is not in that scene it will **not** be checked for collisions with these shapes.
 
 The adjustPosition method on the joystick returns the collided shape if a collision occured in that motion.
 
@@ -98,7 +109,9 @@ The adjustPosition method on the joystick returns the collided shape if a collis
     
 ### Other Features ###
 
-Check out the [test game] (https://github.com/ahoskins/Spark/blob/master/testgame.cpp) for more comprehensive examples and available features.  
+Check out the [test game] (https://github.com/ahoskins/Spark/blob/master/testgame.cpp) for more comprehensive examples and available features.
+
+<3 
 
 
 
