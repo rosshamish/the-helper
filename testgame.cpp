@@ -1,4 +1,12 @@
-#include "ZZ.h"
+/*
+What is being demonstrated here?
+1. Collision detection
+2. Multiple scenes
+3. Add same shape to multiple scenes, and delete from scene
+4. One-liner to change the handle on the joystick
+*/
+
+#include "Spark.h"
 
 void setup() {
 	// Display
@@ -11,14 +19,6 @@ void setup() {
 	tft.initR(INITR_REDTAB);
 	Serial.print("Init..");
 	tft.fillScreen(0);
-
-	/*
-	What is being demonstrated here?
-	1. Collision detection
-	2. Multiple scenes that can easily be drawn in and out
-	3. 
-	*/
-
 
 	/*
 	First scene
@@ -66,15 +66,17 @@ void setup() {
 	Gameplay
 	*/
 	bool finished = false;
+	bool portalArrived = false;
 	while (1) {
 		// Check for motion and collision
 		Rectangle* collidedShape = NULL;
 		collidedShape = myJoy.adjustPosition();
 
-		if (goodGuy.getY() > bigLine.getY()) {
+		if (goodGuy.getY() > bigLine.getY() && !portalArrived) {
 			// draw me a portal!
 			firstScene.addToScene(&theWayOut);
 			firstScene.drawScene(false);
+			portalArrived = true;
 		}
 
 		if (collidedShape != NULL) {
