@@ -107,5 +107,22 @@ void setup() {
 }
 
 void loop() {
+		// demo for banner moving around the screen
+	// not the best implementation
+	for(int i = 0; i< 170; i++){
+		scrollStr("banner test 1", 2, i, 0, 0, ST7735_WHITE, ST7735_BLACK, 0, tft);
+	}
+	
+	for(int i = 0; i< 170; i++){
+		scrollStr("banner test 2", 2, i, 0, 1, ST7735_RED, ST7735_BLACK, 0, tft);
+	}
+
+	for(int i = 0; i< 170; i++){
+		scrollStr("banner test 3", 2, i, 0, 2, ST7735_BLUE, ST7735_BLACK, 0, tft);
+	}
+
+	for(int i = 0; i< 170; i++){
+		scrollStr("banner test 4", 2, i, 0, 3, ST7735_GREEN, ST7735_BLACK, 0, tft);
+	}
 
 }

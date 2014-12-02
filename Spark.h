@@ -25,4 +25,6 @@
 #include "Rectangle.h"
 #include "Scene.h"
 
+#include "scrollingBanner.h"
+
 #endif
