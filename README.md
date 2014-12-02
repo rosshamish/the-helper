@@ -82,6 +82,8 @@ There are two ways to draw scenes: in their original state, or most recent state
 
 We can also hide an entire scene.  This will not remove the shapes from the scene or deconstruct the scene, but simply not display the scene. 
 
+    myScene.hideScene();
+
 ### Motion ###
 
 To add some motion to our scene lets initiate a *joystick*.  The joystick is in charge of controlling the motion of one shape at time.  But since shapes can be associated with multiple scenes, specify the scene to be controlled also. 
