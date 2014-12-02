@@ -1,5 +1,5 @@
-#ifndef ZZ_H
-#define ZZ_H
+#ifndef SPARK_H
+#define SPARK_H
 
 // Standard Lib/Screen
 #include <Arduino.h>
