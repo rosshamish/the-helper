@@ -27,6 +27,8 @@ public:
 
 	void addToScene(Rectangle* rect);
 
+	void removeFromScene(Rectangle* rect);
+
 	void traverseScene();
 
 	Rectangle* checkForCollision(Rectangle* delegate);

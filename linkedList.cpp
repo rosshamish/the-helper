@@ -131,6 +131,20 @@ node* findNode(list* myList, Rectangle* shape) {
 	return NULL;
 }
 
+void removeFromList(list* myList, Rectangle* target) {
+	// find the target
+	node* found = findNode(myList, target);
+
+	// Adjust the pointers
+	node* previous = found->prev;
+	previous->next = found->next;
+
+	if (found->next != NULL) {
+		node* next = found->next;
+		next->prev = previous;
+	}
+}
+
 // Do the hard work to find collision and know which side collision is on
 bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 

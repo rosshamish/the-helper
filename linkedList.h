@@ -40,6 +40,8 @@ list* llNew();
 
 void addToEnd(list* mylist, Rectangle* shape);
 
+void removeFromList(list* myList, Rectangle* target);
+
 void printList(list* myList);
 
 node* findNode(list* myList, Rectangle* shape);

@@ -12,10 +12,13 @@ void setup() {
 	Serial.print("Init..");
 	tft.fillScreen(0);
 
-	// If you hit the red things it goes back to the start of the first scene
-	// There are a few "portals" taking you across the screen
-	// i.e., the portals delete the old delegate, and spawn a new delegate somewhere else
-	// When you reach the end portal a new scene appears
+	/*
+	What is being demonstrated here?
+	1. Collision detection
+	2. Multiple scenes that can easily be drawn in and out
+	3. 
+	*/
+
 
 	/*
 	First scene
@@ -38,7 +41,7 @@ void setup() {
 	firstScene.addToScene(&ObstacleThree);
 	firstScene.addToScene(&wtf);
 
-	// Draw in original position (doesn't actually matter at this point though)
+	// Draw in original position ("true" doesn't actually matter at this point though)
 	firstScene.drawScene(true);
 
 	/*
@@ -49,7 +52,7 @@ void setup() {
 	secondScene.addToScene(&bigLine);
 	secondScene.addToScene(&goodGuy);
 
-	Rectangle finishLine(50, 10, 7, 7, &tft, 0xFEFE);
+	Rectangle finishLine(50, 12, 7, 7, &tft, 0xFEFE);
 
 	secondScene.addToScene(&finishLine);
 
@@ -62,7 +65,7 @@ void setup() {
 	/*
 	Gameplay
 	*/
-	bool sceneOneMode = true;
+	bool finished = false;
 	while (1) {
 		// Check for motion and collision
 		Rectangle* collidedShape = NULL;
@@ -80,24 +83,25 @@ void setup() {
 				firstScene.hideScene();
 				secondScene.drawScene(true);
 				myJoy.addHandle(&secondScene, &goodGuy);
-				sceneOneMode = false;
 			} 
+			else if (collidedShape == &finishLine) {
+				// Magically make the finish like the new delegate!
+				myJoy.addHandle(&secondScene, &finishLine);
+				secondScene.removeFromScene(&finishLine);
+				secondScene.hideScene();
+				tft.setCursor(5, 70);
+				tft.setTextSize(2);
+				tft.print("Spark.");
+			}
 			else {
 				// Restore state of scene
 				firstScene.hideScene();
 				delay(250);
 				firstScene.drawScene(true);
 			}
-
-			if (collidedShape == &finishLine) {
-				goodGuy.setColor(0xFFFF);
-				goodGuy.drawShape();
-			}
-
-		}			
+		}
 		
 	}
-
 }
 
 void loop() {

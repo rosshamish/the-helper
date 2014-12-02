@@ -52,6 +52,10 @@ Rectangle* Scene::checkForCollision(Rectangle* delegate) {
 	return NULL;
 }
 
+void Scene::removeFromScene(Rectangle* target) {
+	removeFromList(llShapes, target);
+}
+
 void Scene::drawScene(bool original) {
 	// Clear the screen
 	//this->tft->fillScreen(0);
