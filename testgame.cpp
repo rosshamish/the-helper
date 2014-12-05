@@ -58,7 +58,6 @@ void setup() {
 	/*
 	****************************************
 	Scrolling banner demo
-	This is essentially a stand-alone feature, but nonethelesss useful in many games
 	****************************************
 	*/
 	scrollBanner("Arduino", tft, 2);
