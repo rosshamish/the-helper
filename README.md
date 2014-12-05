@@ -24,6 +24,8 @@ Requirements
 - [Adafruit_ST7735.h display library] (https://github.com/adafruit/Adafruit-ST7735-Library)
 - [SPI.h] (http://arduino.cc/en/Reference/SPI)
 
+Make sure all these libraries are in your path.  Then run `make` from the command line to build.
+
 Pins
 =====
 
