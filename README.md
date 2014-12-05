@@ -10,7 +10,7 @@ Created by Andrew Hoskins and Nathan Mueller.
 What is this?
 ======
 
-A library to help speed up game development on the [1.8-inch Adafruit TFT LCD display] (http://www.adafruit.com/products/358). It handles **motion, collision detection, and scenes**.  The library also includes two of the most common game accessories - **scoreboards and banners**.
+A library to help speed up game development on the [1.8-inch Adafruit TFT LCD display](http://www.adafruit.com/products/358). It handles **motion, collision detection, and scenes**.  The library also includes two of the most common game accessories - **scoreboards and banners**.
 
 It features a easy to use API, and is ideal for creating simple 2-D games like brickbreaker, connect-four, and maze games.
 
@@ -18,11 +18,11 @@ Requirements
 =======
 
 - [1.8-inch Adafruit TFT LCD display](http://www.adafruit.com/products/358)
-- [Sparkfun Joystick] (https://www.sparkfun.com/products/9032)
-- [Arduino.h standard library] (http://arduino.cc/en/Guide/Environment)
-- [Adafruit_GFX.h base graphics library] (https://github.com/adafruit/Adafruit-GFX-Library)
-- [Adafruit_ST7735.h display library] (https://github.com/adafruit/Adafruit-ST7735-Library)
-- [SPI.h] (http://arduino.cc/en/Reference/SPI)
+- [Sparkfun Joystick](https://www.sparkfun.com/products/9032)
+- [Arduino.h standard library](http://arduino.cc/en/Guide/Environment)
+- [Adafruit_GFX.h base graphics library](https://github.com/adafruit/Adafruit-GFX-Library)
+- [Adafruit_ST7735.h display library](https://github.com/adafruit/Adafruit-ST7735-Library)
+- [SPI.h](http://arduino.cc/en/Reference/SPI)
 
 Make sure all these libraries are in your path.  Then run `make` from the command line to build.
 
@@ -139,25 +139,6 @@ You are responsible for making sure no other shapes or text is drawn over the sc
 
 ### Other Features ###
 
-Check out the [test game] (https://github.com/ahoskins/the-helper/blob/master/testgame.cpp) for more comprehensive examples and available features.
+Check out the [test game](https://github.com/ahoskins/the-helper/blob/master/testgame.cpp) for more comprehensive examples and available features.
 
 <3 
-
-
-
-
-
-
-
-
-
- 
-	
-
-
-
-
-
-  
-
-
