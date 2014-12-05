@@ -10,6 +10,7 @@ What is being demonstrated here?
 4. Draw entire scene, erase entire scene in one-liner
 5. One-liner to change shape controlled by the joystick
 6. A generic scrolling banner
+7. Score board
 
 */
 
@@ -29,17 +30,30 @@ void setup() {
 	Scoreboard
 	****************************************
 	*/
-	char *str[2] = {"player", "player"};
+
+	// Create some players for the scoreboard
+	char *str[2] = {"guyOne", "guyTwo"};
+
+	// Some dummy data for the scoreboard
 	int data[2] = {1, 2};
 	
+	// Draw the scoreboard
 	createScoreboard(str, data, 2, 1, 0, 0, 1, 0xFFFFFF, tft);
+	delay(5000);
+	clearScoreboard(0x000000, tft);
+
+	// Simulate data changing, then draw the scoreboard again
 	data[0] = 78;
+	createScoreboard(str, data, 2, 1, 0, 0, 1, 0xFFFFFF, tft);
 	delay(5000);
-	clearScoreboard(0x000000,tft);
-	createScoreboard(str,data,2,1,0,0,1,0xFFFFFF,tft);
-	delay(5000);
-	clearScoreboard(0x000000,tft);
+	clearScoreboard(0x000000, tft);
+
+	// Draw the scoreboard with a different aspect ratio
 	createScoreboard(str, data, 1, 2, 0, 0, 1, 0xFFFFFF, tft);
+	delay(5000);
+
+	// Clear the screen
+	tft.fillScreen(0);
 
 	/*
 	****************************************
@@ -47,7 +61,7 @@ void setup() {
 	This is essentially a stand-alone feature, but nonethelesss useful in many games
 	****************************************
 	*/
-	scrollBanner("Arduino.", tft);
+	scrollBanner("Arduino", tft, 2);
 
 	/*
 	****************************************
