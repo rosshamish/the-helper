@@ -14,7 +14,7 @@ What is being demonstrated here?
 */
 
 // Library header
-#include "Spark.h"
+#include "gameHelper.h"
 
 void setup() {
 	/*
@@ -108,7 +108,7 @@ void setup() {
 		if (collidedShape != NULL) {
 			if (collidedShape == &theWayOut) {
 				// Erase the first scene and draw the second scene
-				firstScene.hideScene();
+				firstScene.hideScene(false);
 				secondScene.drawScene(true);
 
 				// Change the rectangle and scene controlled by the joystick
@@ -121,12 +121,12 @@ void setup() {
 
 				// Erase everything from the scene except this newly controlled rectangle
 				secondScene.removeFromScene(&finishLine);
-				secondScene.hideScene();
+				secondScene.hideScene(false);
 			}
 			// Collision was not with a special object
 			else {
 				// Restart the level by drawing it on its original positions (true arguement)
-				firstScene.hideScene();
+				firstScene.hideScene(false);
 				delay(250);
 				firstScene.drawScene(true);
 			}

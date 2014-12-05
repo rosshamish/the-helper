@@ -1,5 +1,6 @@
 #include "Rectangle.h"
 
+// Constructor
 Rectangle::Rectangle(int x, int y, int width, int height, Adafruit_ST7735* tft, int color): Screen(tft) {
 	this->x = x;
 	this->y = y;
@@ -14,7 +15,6 @@ Rectangle::Rectangle(int x, int y, int width, int height, Adafruit_ST7735* tft, 
 /*
 Getters
 */
-
 int Rectangle::getX() {
 	return this->x;
 }
@@ -42,7 +42,6 @@ int Rectangle::getOriginalY() {
 /*
 Setters 
 */
-
 void Rectangle::setY(int newY) {
 	this->y = newY;
 }
@@ -59,20 +58,24 @@ void Rectangle::setColor(int color) {
 Movement and Drawing
 */
 
+// Hide shape by drawing background on its coordinates
 void Rectangle::hideShape() {
 	redrawBackground();
 }
 
+// use GFX library functions to draw
 void Rectangle::drawShape() {
 	tft->drawRect(this->x, this->y, this->width, this->height, this->color);
 	tft->fillRect(this->x, this->y, this->width, this->height, this->color);
 }
 
+// Draw the image of shape with black (assuming black background)
 void Rectangle::redrawBackground() {
 	tft->drawRect(this->x, this->y, this->width, this->height, 0x0000);
 	tft->fillRect(this->x, this->y, this->width, this->height, 0x0000);
 }
 
+// Draw background on old position, move, and redraw
 void Rectangle::moveRight() {
 	// Redraw old position
 	redrawBackground();

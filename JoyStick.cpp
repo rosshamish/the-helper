@@ -1,25 +1,28 @@
 #include "JoyStick.h"
 
+// Constructor
 JoyStick::JoyStick(Adafruit_ST7735* tft): Screen(tft) {
 	// Grab default readings and store in some private variables
 	this->vertDefault = analogRead(VERT);
 	this->horizDefault = analogRead(HORIZ);
 }
 
+// Add a Rectangle and scene to be checked for motion
 void JoyStick::addHandle(Scene* scene, Rectangle* delegate) {
 	this->scene = scene;
 	this->delegate = delegate;
 }
 
+// Check for motion
+// If there was motion, call appropriate functions to check for collisions
 Rectangle* JoyStick::adjustPosition() {
+	bool motionHappened = false;
 	/*
 	If movement is necessary, then move
 	*/
-
 	int16_t vertDiff = analogRead(VERT) - this->vertDefault;
 	int16_t horizDiff = analogRead(HORIZ) - this->horizDefault;
 
-	bool motionHappened = false;
 	// Go down
 	if (vertDiff < -10) {
 		this->delegate->moveUp();
@@ -43,9 +46,8 @@ Rectangle* JoyStick::adjustPosition() {
 	}
 
 	/*
-	Things to do if there is movement
+	If there was motion, ensure still on screen and also check for collisions
 	*/
-
 	Rectangle* collidedShape = NULL;
 
 	if (motionHappened) {
@@ -57,7 +59,7 @@ Rectangle* JoyStick::adjustPosition() {
 
 	}
 
-	// Chill out and go slow
+	// Chill out and go slow, we want the joystick to be a reasonable speed
 	delay(20);
 
 	// Alert if collision happened

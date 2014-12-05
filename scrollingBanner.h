@@ -1,5 +1,5 @@
-#ifndef SCROLLINGBANNER_H
-#define SCROLLINGBANNER_H
+#ifndef SCROLLING_BANNER_H
+#define SCROLLING_BANNER_H
 
 #include <Adafruit_GFX.h>    // Core graphics library
 #include <Adafruit_ST7735.h> // Hardware-specific library

@@ -1,10 +1,6 @@
 #include "scrollingBanner.h"
 
-/*
-	funcuntion def and pre/post cond
-	
-	TODO: write a custom textWrap so text can wrap to the same line
-*/
+// The function the makes it scroll
 void scrollStr(char *str, int speed, int x, int y, int rot, int color, int backGrdCol, int size, Adafruit_ST7735 tft){
 	tft.setTextWrap(false);
 	tft.setRotation(rot);
@@ -20,6 +16,7 @@ void scrollStr(char *str, int speed, int x, int y, int rot, int color, int backG
 	tft.print(str);
 }
 
+// The external API function
 void scrollBanner(char* message, Adafruit_ST7735 tft) {
 	for(int i = 0; i< 170; i++){
 		scrollStr(message, 2, i, 0, 0, ST7735_WHITE, ST7735_BLACK, 2, tft);

@@ -1,5 +1,5 @@
 /*
-Subclass of ZZSprite.cpp
+Rectangle class: subclass of screen
 
 Implementating a box shaped object
 */

@@ -1,5 +1,5 @@
 /*
-Scene Class
+Scene Class: subclass of screen
 
 Stores a linked list of added shapes
 Checks for map boundaries
@@ -37,7 +37,7 @@ public:
 
 	void drawScene(bool original);
 
-	void hideScene();
+	void hideScene(bool original);
 
 };
 

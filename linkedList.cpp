@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "linkedList.h"
 
+// Constructor
 list* llNew() {
 	list* myList = (list*) malloc(sizeof(list));
 	myList->length = 0;
@@ -11,10 +12,7 @@ list* llNew() {
 	return myList;
 }
 
-/*
-The head node in the list has NULL previous pointer!
-*/
-
+// Append to end of the list
 void addToEnd(list* myList, Rectangle* shape) {
 	// Create a new node
 	node* newNode = (node*) malloc(sizeof(node));
@@ -22,8 +20,7 @@ void addToEnd(list* myList, Rectangle* shape) {
 	newNode->next = NULL;
 	newNode->prev = NULL;
 
-	// Add to list
-	// 
+	// Check if list is empty
 	if (myList->length == 0) {
 		// List is currently empty
 		myList->head = newNode;
@@ -40,6 +37,7 @@ void addToEnd(list* myList, Rectangle* shape) {
 
 }
 
+// Traverse list printing to serial (for debugging mainly)
 void printList(list* mylist) {
 	Serial.begin(9600);
 	// Traverse the entire list, printing each node
@@ -51,18 +49,17 @@ void printList(list* mylist) {
 
 		currentNode = currentNode->next;
 	}
-	
 }
 
-// Draw all the elements
+// Draw all the elements (Rectangles)
 void drawEachElement(list* myList, bool original) {
-	// start at the head
+	// Start at the head
 	node* currentNode = myList->head;
 	while (currentNode != NULL) {
-		// draw this node
+		// Draw this node
 		Rectangle* currentRect = currentNode->shape;
 
-		// revert back to old state
+		// Revert back to original state
 		if (original) {
 			currentRect->setX(currentRect->getOriginalX());
 			currentRect->setY(currentRect->getOriginalY());
@@ -75,12 +72,19 @@ void drawEachElement(list* myList, bool original) {
 	}
 }
 
-void hideEachElement(list* myList) {
+// Erase each Rectangle in the list
+void hideEachElement(list* myList, bool original) {
 	// start at the head
 	node* currentNode = myList->head;
 	while (currentNode != NULL) {
 		// hide this node
 		Rectangle* currentRect = currentNode->shape;
+
+		if (original) {
+			currentRect->setX(currentRect->getOriginalX());
+			currentRect->setY(currentRect->getOriginalY());			
+		}
+
 		currentRect->redrawBackground();
 
 		// increment
@@ -88,7 +92,8 @@ void hideEachElement(list* myList) {
 	}
 }
 
-// Only check for collisions with the DELEGATE! 
+// Check for collisions with all shapes in delegate's scene
+// This will NOT check for collision with other scenes 
 Rectangle* checkForCollision_ll(list* myList, Rectangle* delegate) {
 	node* delegateNode = findNode(myList, delegate);
 	Rectangle* delegateRect = delegateNode->shape;
@@ -131,6 +136,7 @@ node* findNode(list* myList, Rectangle* shape) {
 	return NULL;
 }
 
+// Remove node from list
 void removeFromList(list* myList, Rectangle* target) {
 	// find the target
 	node* found = findNode(myList, target);
@@ -145,7 +151,7 @@ void removeFromList(list* myList, Rectangle* target) {
 	}
 }
 
-// Do the hard work to find collision and know which side collision is on
+// Find the collision and know which side collision is on
 bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* delegateRect) {
 
 	// Get image of referenceRect

@@ -1,12 +1,11 @@
 /*
 Joystick class : subclass of Screen
 
-Responsible instigating movement by reading the joystick pins
+Responsible for instigating movement by reading the joystick pins
 Controls one delegate and one scene
-Calls checkForMotion on the scene it delegates
+Calls checkForMotion on the scene it controls
 
 */
-
 
 #ifndef JOYSTICK_H
 #define JOYSTICK_H
@@ -41,7 +40,7 @@ public:
 
 	void addHandle(Scene* scene, Rectangle* delegate);
 
-	// Handle moving of the shape (call checkForCollision is moved)
+	// Handle motion of the controlled shape
 	Rectangle* adjustPosition();
 };
 

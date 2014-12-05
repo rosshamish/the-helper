@@ -2,7 +2,6 @@
 Linked List used by Scene to store shapes
 */
 
-
 #ifndef LINKED_LIST_H
 #define LINKED_LIST_H
 
@@ -35,7 +34,6 @@ typedef struct {
 /*
 Methods
 */
-
 list* llNew();
 
 void addToEnd(list* mylist, Rectangle* shape);
@@ -52,6 +50,6 @@ bool checkEachCollisionSide(Rectangle* referenceRect, Rectangle* currentRect);
 
 void drawEachElement(list* myList, bool original);
 
-void hideEachElement(list* myList);
+void hideEachElement(list* myList, bool original);
 
 #endif

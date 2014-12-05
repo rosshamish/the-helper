@@ -1,5 +1,5 @@
-#ifndef SPARK_H
-#define SPARK_H
+#ifndef GAME_HELPER_H
+#define GAME_HELPER_H
 
 // Standard Lib/Screen
 #include <Arduino.h>
@@ -14,17 +14,14 @@
 #define TFT_DC  7
 #define TFT_RST 8
 
+// Shape, scene, collision, joystick modules
 #include "Screen.h"
-
-// Linked list
 #include "linkedList.h"
-
 #include "JoyStick.h"
-
-// Class header
 #include "Rectangle.h"
 #include "Scene.h"
 
+// Scrolling banner function
 #include "scrollingBanner.h"
 
 #endif
