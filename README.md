@@ -1,7 +1,7 @@
-Spark
+the-helper
 =====
 
-An Arduino graphics library for collision, movement, and scenes.
+An Arduino game library for collisions, movement, and scenes.  The library also includes two commonly used game elements: scoreboards and scrolling banners.
 
 Made for the Adafruit TFT display.
 
@@ -10,7 +10,9 @@ Created by Andrew Hoskins and Nathan Mueller.
 What is this?
 ======
 
-A library to help speed up game development on the [1.8-inch Adafruit TFT LCD display] (http://www.adafruit.com/products/358). It handles **motion, collision detection, and scenes**.  The library also includes two of the most common game accessories - **score clocks and banners**.
+A library to help speed up game development on the [1.8-inch Adafruit TFT LCD display] (http://www.adafruit.com/products/358). It handles **motion, collision detection, and scenes**.  The library also includes two of the most common game accessories - **scoreboards and banners**.
+
+It features a easy to use API, and is ideal for creating simple 2-D games like brickbreaker, connect-four, and maze games.
 
 Requirements
 =======
@@ -80,9 +82,9 @@ We can draw the entire at once.
     
 There are two ways to draw scenes: in their original state, or most recent state.  The `true` argument means to draw all the shapes in the scene in their original positions (with respect to when they were constructed).  If `false` was supplied, this would draw the shapes based on their last recorded x-y coordinates (i.e., coordinates after moved by the joystick).
 
-We can also hide an entire scene.  This will not remove the shapes from the scene or deconstruct the scene, but simply not display the scene. 
+We can also hide an entire scene.  This will not remove the shapes from the scene or deconstruct the scene, but simply not display the scene.  Once again, the `true` or `false` argument is needed.   
 
-    myScene.hideScene();
+    myScene.hideScene(true);
 
 ### Motion ###
 
@@ -93,9 +95,9 @@ To add some motion to our scene lets initiate a *joystick*.  The joystick is in 
     
 The shape controlled by the joystick can be changed at any time by using this method.
 
-Generally, changing the displayed scene and changing the handle on the joystick go hand-in-hand.
+Generally, changing the displayed scene and changing the shape controlled by the joystick go hand-in-hand.
 
-To check the controlled shape for movement, use the `adjustPosition()` method (likely in a loop):
+To check the controlled shape for movement, use the `adjustPosition()` method:
 
     while (gameIsPlaying) {
         myJoy.adjustPosition();
@@ -108,10 +110,34 @@ One of the main purposes of *scenes* is to define a scope for collisions.  Shape
 The adjustPosition method on the joystick returns the collided shape if a collision occured in that motion.
 
     Rectangle* collidedShape = myJoy.adjustPosition();
+   
+It is worth noting that this library assumes collisions arise due to movement in the shape controlled by the joystick.  Through this method, collisions are **only checked with the shape controlled by the joystick vs all other shapes in its scene** (not every possible permutation of collisions). 
+
+### Scrolling Banner ###
+
+Use the scrolling banner by passing the following method a string, TFT display instance, and the rotation.
+
+    scrollBanner("Arduino!", tft, 2);
     
+The rotation is a number between 0 and 3 (inclusive).  This dictates which side of the screen the banner will scroll on.
+
+### Score Board ###
+
+Here is the definition of the function used to draw a scoreboard:
+
+    void createScoreBoard(char** playerNames, int data[], int numRow, int numColumn, int x, int y, int textSize, int color,        Adafruit_ST7735 tft);
+    
+To clear the scoreboard, call the following function:
+
+    void clearScoreboard(int backgroundColor, Adafruit_ST7735 tft);
+    
+The workflow to update the score is: erase the current scoreboard, then draw a new scoreboard with the updated score.
+    
+You are responsible for making sure no other shapes or text is drawn over the scoreboard! You are also responsible for making sure the number of rows and columns you specify for the scoreboard fits on the screen - there is no autoformat.
+
 ### Other Features ###
 
-Check out the [test game] (https://github.com/ahoskins/Spark/blob/master/testgame.cpp) for more comprehensive examples and available features.
+Check out the [test game] (https://github.com/ahoskins/the-helper/blob/master/testgame.cpp) for more comprehensive examples and available features.
 
 <3 
 
