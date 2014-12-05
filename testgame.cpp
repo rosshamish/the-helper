@@ -1,137 +1,147 @@
 /*
+Andrew Hoskins and Nathan Mueller
+
+This is a short demo showing the most useful features of the library.
+
 What is being demonstrated here?
 1. Collision detection
-2. Multiple scenes
-3. Add same shape to multiple scenes, and delete from scene
-4. One-liner to change the handle on the joystick
+2. Draw and track shapes through API interface
+3. Create multiple scenes, add shapes and delete shapes from them
+4. Draw entire scene, erase entire scene in one-liner
+5. One-liner to change shape controlled by the joystick
+6. A generic scrolling banner
+
 */
 
+// Library header
 #include "Spark.h"
 
-
-
 void setup() {
-
-	// Display
-	Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
-
 	/*
-	The the basic setup
+	Display instance
 	*/
-	Serial.begin(9600);
+	Adafruit_ST7735 tft = Adafruit_ST7735(TFT_CS, TFT_DC, TFT_RST);
 	tft.initR(INITR_REDTAB);
-	Serial.print("Init..");
 	tft.fillScreen(0);
 
 	/*
+	****************************************
 	Scrolling banner demo
+	This is essentially a stand-alone feature, but nonethelesss useful in many games
+	****************************************
 	*/
-
-	for(int i = 0; i< 170; i++){
-		scrollStr("Spark", 2, i, 0, 0, ST7735_WHITE, ST7735_BLACK, 2, tft);
-	}
-	
-	for(int i = 0; i< 170; i++){
-		scrollStr("Such scroll", 2, i, 0, 1, ST7735_RED, ST7735_BLACK, 2, tft);
-	}
-
-	for(int i = 0; i< 170; i++){
-		scrollStr("Spark", 2, i, 0, 2, ST7735_BLUE, ST7735_BLACK, 2, tft);
-	}
-
-	for(int i = 0; i< 170; i++){
-		scrollStr("Such scroll", 2, i, 0, 3, ST7735_GREEN, ST7735_BLACK, 2, tft);
-	}
-
-	tft.setRotation(0);
+	scrollBanner("Arduino.", tft);
 
 	/*
-	First scene
+	****************************************
+	Initiate our shapes, scene, and joystick
+	****************************************
+	*/
+
+	/*
+	Create some rectangles
+	*/
+	Rectangle goodGuy(5, 5, 7, 7, &tft, 0xFF00);
+	Rectangle bigLine(0, 30, 100, 5, &tft, 0x0033);
+	Rectangle obstacle(30, 15, 5, 15, &tft, 0x0033);
+	Rectangle obstacleTwo(60, 0, 5, 15, &tft, 0x0033);
+	Rectangle ObstacleThree(95, 35, 5, 25, &tft, 0x0033);
+	Rectangle blockingTheWay(95, 60, 35, 5, &tft, 0x0033); 
+	Rectangle theWayOut(90, 10, 10, 10, &tft, 0xFFFF);
+
+	/*
+	Create a first scene
 	*/
 	Scene firstScene;
-
-	Rectangle goodGuy(5, 5, 7, 7, &tft, 0xFF00);
-	Rectangle bigLine(0, 30, 100, 5, &tft, 0x0033); // line blocking the way
-	Rectangle obstacle(30, 15, 5, 15, &tft, 0x0033); // obstacle
-	Rectangle obstacleTwo(60, 0, 5, 15, &tft, 0x0033); // obstacle
-	Rectangle ObstacleThree(95, 35, 5, 25, &tft, 0x0033); // obstacle
-	Rectangle wtf(95, 60, 35, 5, &tft, 0x0033); //wtf is this 
-
-	Rectangle theWayOut(90, 10, 10, 10, &tft, 0xFFFF); // portal
 
 	firstScene.addToScene(&goodGuy);
 	firstScene.addToScene(&bigLine);
 	firstScene.addToScene(&obstacle);
 	firstScene.addToScene(&obstacleTwo);
 	firstScene.addToScene(&ObstacleThree);
-	firstScene.addToScene(&wtf);
+	firstScene.addToScene(&blockingTheWay);
 
-	// Draw in original position ("true" doesn't actually matter at this point though)
+	// Draw entire scene
+	//
+	// True parameter means to draw in original positions
+	// This parameter only has an affect if the shapes have moved since created
 	firstScene.drawScene(true);
 
 	/*
-	Second scene
+	Create a second scene
 	*/
 	Scene secondScene;
 
-	secondScene.addToScene(&bigLine);
-	secondScene.addToScene(&goodGuy);
-
+	// Make another shape
 	Rectangle finishLine(50, 12, 7, 7, &tft, 0xFEFE);
 
+	// "bigLine" and "goodGuy" was already added to "firstScene", but we can add it here also
+	secondScene.addToScene(&bigLine);
+	secondScene.addToScene(&goodGuy);
 	secondScene.addToScene(&finishLine);
 
 	/*
-	Joystick
+	Declare a Joystick object
 	*/
 	JoyStick myJoy (&tft);
+
+	// Add the shape and scene it will control
+	// To understand why the scene has to be added, read the README!
 	myJoy.addHandle(&firstScene, &goodGuy);
 
 	/*
-	Gameplay
+	****************************************
+	Game loop
+	****************************************
 	*/
 	bool finished = false;
 	bool portalArrived = false;
+
+	// The essence is to continually check for joystick motion and collision
+	// The "adjustPosition()" method returns the collided object (if no collison, null)
 	while (1) {
 		// Check for motion and collision
 		Rectangle* collidedShape = NULL;
 		collidedShape = myJoy.adjustPosition();
 
-		if (goodGuy.getY() > bigLine.getY() && !portalArrived) {
-			// draw me a portal!
-			firstScene.addToScene(&theWayOut);
-			firstScene.drawScene(false);
-			portalArrived = true;
-		}
-
+		// If there is a collision, find which shape collided
 		if (collidedShape != NULL) {
 			if (collidedShape == &theWayOut) {
-				// Draw the second scene
+				// Erase the first scene and draw the second scene
 				firstScene.hideScene();
 				secondScene.drawScene(true);
+
+				// Change the rectangle and scene controlled by the joystick
 				myJoy.addHandle(&secondScene, &goodGuy);
 			} 
 			else if (collidedShape == &finishLine) {
-				// Magically make the finish like the new delegate!
+
+				// Change the shape controlled by the joystick
 				myJoy.addHandle(&secondScene, &finishLine);
+
+				// Erase everything from the scene except this newly controlled rectangle
 				secondScene.removeFromScene(&finishLine);
 				secondScene.hideScene();
-				tft.setCursor(5, 70);
-				tft.setTextSize(2);
-				tft.print("Spark.");
 			}
+			// Collision was not with a special object
 			else {
-				// Restore state of scene
+				// Restart the level by drawing it on its original positions (true arguement)
 				firstScene.hideScene();
 				delay(250);
 				firstScene.drawScene(true);
 			}
 		}
-		
+
+		// Use the rectangle shape API to check its position and respond
+		if (goodGuy.getY() > bigLine.getY() && !portalArrived) {
+			// Add to the scene on the fly and redraw the scene
+			firstScene.addToScene(&theWayOut);
+			firstScene.drawScene(false);
+
+			portalArrived = true;
+		}	
 	}
 }
 
 void loop() {
-
-
 }

@@ -14,4 +14,6 @@
 
 void scrollStr(char *str, int speed, int x, int y, int rot, int color, int backGrdCol, int size, Adafruit_ST7735 tft);
 
+void scrollBanner(char* message, Adafruit_ST7735 tft);
+
 #endif
