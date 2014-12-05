@@ -24,4 +24,6 @@
 // Scrolling banner function
 #include "scrollingBanner.h"
 
+#include "scoreboard.h"
+
 #endif

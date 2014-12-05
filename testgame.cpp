@@ -26,6 +26,23 @@ void setup() {
 
 	/*
 	****************************************
+	Scoreboard
+	****************************************
+	*/
+	char *str[2] = {"player", "player"};
+	int data[2] = {1, 2};
+	
+	createScoreboard(str, data, 2, 1, 0, 0, 1, 0xFFFFFF, tft);
+	data[0] = 78;
+	delay(5000);
+	clearScoreboard(0x000000,tft);
+	createScoreboard(str,data,2,1,0,0,1,0xFFFFFF,tft);
+	delay(5000);
+	clearScoreboard(0x000000,tft);
+	createScoreboard(str, data, 1, 2, 0, 0, 1, 0xFFFFFF, tft);
+
+	/*
+	****************************************
 	Scrolling banner demo
 	This is essentially a stand-alone feature, but nonethelesss useful in many games
 	****************************************
